@@ -7,6 +7,7 @@ import Soon from "../app/AddSoon";
 import {Terminals} from "../app/Terminal";
 import {Google} from "../app/Google"
 import Spotify from "../app/Spotify"
+import SkillsShowcase from "../app/Skills"
 export default function Dock() {
   const openApp = useAppStore((s) => s.openApp);
   const [hoveredApp, setHoveredApp] = useState(null);
@@ -19,18 +20,18 @@ export default function Dock() {
       label: "Google",
       icon: "/icons/google.jpg",
       comp: <Google />,
+    }, 
+      {
+      id: "Blogs",
+      label: "Blogs",
+      icon: "/icons/Blogs.png",
+      comp: <Terminals />,
     },
     {
-      id: "projects",
-      label: "Projects",
-      icon: "/icons/Projects.jpg",
-      comp: <Settings />,
-    },
-    {
-      id: "skills",
-      label: "Skills",
+      id: "About Me ",
+      label: "About Me ",
       icon: "/icons/skills.jpg",
-      comp: <Notes />,
+      comp: <SkillsShowcase />,
     },
     {
       id: "spotify",
@@ -52,12 +53,23 @@ export default function Dock() {
     },
     { divider: true },
 
-    // ✅ REAL LINKS HERE
+  
     {
       id: "Github",
       label: "GitHub",
       icon: "/icons/github.jpg",
       url: "https://github.com/tanishtirpathi",
+    },
+     {
+      id: "Youtube",
+      label: "Youtube",
+      icon: "/icons/Youtube.jpg",
+      url: "https://www.youtube.com/@tanishtirpathi0",
+    }, {
+      id: "Instagram",
+      label: "Instagram",
+      icon: "/icons/Instagram.jpg",
+      url: "https://www.instagram.com/techwithtanish/",
     },
     {
       id: "x",

@@ -36,7 +36,15 @@
   outline: none;
   border:none;
 }
-
+ .skill-tag {
+    @apply text-white/80 py-0.5 px-2 rounded bg-black/5 border inline-flex items-center gap-1;
+  }
+  .skill-icon {
+    @apply w-6 h-6 object-cover;
+  }
+  .highlight-tag {
+    @apply text-white/80 py-0.5 px-1 rounded bg-black/5 border;
+  }
 
 /* ----------------------------------------------------------------- */
 @import url('https://fonts.googleapis.com/css2?family=Jaini+Purva&family=Syne:wght@400..800&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
