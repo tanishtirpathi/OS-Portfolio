@@ -30,6 +30,13 @@
 .animate-bounceOnce {
   animation: bounceOnce 0.22s ease-out;
 }
+/* custom range slider */
+.slider {
+  accent-color: #1db954; /* Spotify green */
+  outline: none;
+  border:none;
+}
+
 
 /* ----------------------------------------------------------------- */
 @import url('https://fonts.googleapis.com/css2?family=Jaini+Purva&family=Syne:wght@400..800&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
