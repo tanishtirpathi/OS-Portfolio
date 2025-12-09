@@ -29,7 +29,7 @@ export default function LockScreen({ goNext }) {
     <div className="relative w-screen h-screen overflow-hidden text-white font-sans select-none">
       {/* Background */}
       <div
-        className={`absolute inset-0 bg-[url('./lockbg.png')] bg-cover bg-center bg-no-repeat
+        className={`absolute inset-0 bg-[url('./bglock.jpg')] bg-cover bg-center bg-no-repeat
           transition-all duration-700 ease-in-out
           ${
             isUnlocking
