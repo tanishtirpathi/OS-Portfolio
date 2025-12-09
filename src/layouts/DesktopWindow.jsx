@@ -4,6 +4,7 @@ import AppWindow from "../components/AppWindow";
 import { useAppStore } from "../store/Appstore";
 import TopBar from "../components/TopBar";
 import CursorFollower from "../components/Curorfollow";
+import OnekoCat from "../components/onako/Cat.jsx"
 export default function Desktop({ setStage }) {
   const windows = useAppStore((s) => s.windows);
   const [wallpaper, setWallpaper] = useState("./bg.png");
@@ -20,7 +21,7 @@ export default function Desktop({ setStage }) {
         backgroundImage: `url(${wallpaper})`,
       }}
     >
-      <CursorFollower />
+      <OnekoCat/>
       <div className="absolute left-0 right-0 top-0 z-40">
         <TopBar
           appTitle={windows.length ? windows[windows.length - 1].appId : ""}
