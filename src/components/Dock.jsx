@@ -1,6 +1,6 @@
 // Dock.js — Perfect macOS Dock with per-icon glass UI
 import React, { useState } from "react";
-import { useAppStore } from "../store/appStore";
+import { useAppStore } from "../store/AppStore";
 import Notes from "../app/Notes";
 import Settings from "../app/Settings";
 import Soon from "../app/AddSoon";
