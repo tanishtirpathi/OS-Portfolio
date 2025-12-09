@@ -8,7 +8,7 @@ import { Terminals } from "../app/Terminal";
 import { Google } from "../app/Google";
 import Spotify from "../app/Spotify";
 import SkillsShowcase from "../app/Skills";
-import Gallary from "../app/Gallary"
+import MacGallery from "../app/Gallary"
 export default function Dock() {
   const openApp = useAppStore((s) => s.openApp);
   const [hoveredApp, setHoveredApp] = useState(null);
@@ -29,10 +29,10 @@ export default function Dock() {
       comp: <Terminals />,
     },
     {
-      id: "Gallary",
-      label: "Gallary",
+      id: "Gallery",
+      label: "Gallery",
       icon: "/icons/Gal.jpg",
-      comp: <Gallary />,
+      comp: <MacGallery />,
     },
     {
       id: "About Me ",
