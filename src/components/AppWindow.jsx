@@ -1,5 +1,5 @@
 import { Rnd } from "react-rnd";
-import { useAppStore } from "../store/appStore";
+import { useAppStore } from "../store/AppStore";
 
 export default function AppWindow({ window }) {
   const close = useAppStore((s) => s.closeApp);
