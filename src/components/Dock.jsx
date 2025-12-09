@@ -4,10 +4,11 @@ import { useAppStore } from "../store/appStore";
 import Notes from "../app/Notes";
 import Settings from "../app/Settings";
 import Soon from "../app/AddSoon";
-import {Terminals} from "../app/Terminal";
-import {Google} from "../app/Google"
-import Spotify from "../app/Spotify"
-import SkillsShowcase from "../app/Skills"
+import { Terminals } from "../app/Terminal";
+import { Google } from "../app/Google";
+import Spotify from "../app/Spotify";
+import SkillsShowcase from "../app/Skills";
+import Gallary from "../app/Gallary"
 export default function Dock() {
   const openApp = useAppStore((s) => s.openApp);
   const [hoveredApp, setHoveredApp] = useState(null);
@@ -20,12 +21,18 @@ export default function Dock() {
       label: "Google",
       icon: "/icons/google.jpg",
       comp: <Google />,
-    }, 
-      {
+    },
+    {
       id: "Blogs",
       label: "Blogs",
       icon: "/icons/Blogs.png",
       comp: <Terminals />,
+    },
+    {
+      id: "Gallary",
+      label: "Gallary",
+      icon: "/icons/Gal.jpg",
+      comp: <Gallary />,
     },
     {
       id: "About Me ",
@@ -53,19 +60,19 @@ export default function Dock() {
     },
     { divider: true },
 
-  
     {
       id: "Github",
       label: "GitHub",
       icon: "/icons/github.jpg",
       url: "https://github.com/tanishtirpathi",
     },
-     {
+    {
       id: "Youtube",
       label: "Youtube",
       icon: "/icons/Youtube.jpg",
       url: "https://www.youtube.com/@tanishtirpathi0",
-    }, {
+    },
+    {
       id: "Instagram",
       label: "Instagram",
       icon: "/icons/Instagram.jpg",
