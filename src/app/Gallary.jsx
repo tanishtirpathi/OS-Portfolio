@@ -54,7 +54,7 @@ export default function MacGallery() {
                 objectFit: "cover",
               }}
             />
-            <div className="absolute inset-0 bg-white/0 group-hover:bg-white/10 backdrop-blur-sm transition-all"></div>
+            <div className="absolute inset-0 bg-white/0 group-hover:bg-white/5 backdrop-blur-sm transition-all"></div>
           </div>
         ))}
       </div>

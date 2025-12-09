@@ -1,32 +1,37 @@
-// Dock.js — Perfect macOS Dock with per-icon glass UI
 import React, { useState } from "react";
 import { useAppStore } from "../store/Appstore.js";
 import Notes from "../app/Notes";
-import Settings from "../app/Settings";
 import Soon from "../app/AddSoon";
 import { Terminals } from "../app/Terminal";
 import { Google } from "../app/Google";
 import Spotify from "../app/Spotify";
 import SkillsShowcase from "../app/Skills";
-import MacGallery from "../app/Gallary"
+import MacGallery from "../app/Gallary";
 export default function Dock() {
   const openApp = useAppStore((s) => s.openApp);
   const [hoveredApp, setHoveredApp] = useState(null);
   const [bouncingAppId, setBouncingAppId] = useState(null);
 
   const apps = [
-    { id: "notes", label: "Notes", icon: "/icons/Notes.jpg", comp: <Notes /> },
+    { id: "notes", label: "Notes", icon: "/icons/Notes.png", comp: <Notes /> },
     {
-      id: "Google",
-      label: "Google",
-      icon: "/icons/google.jpg",
-      comp: <Google />,
+      id: "About Me ",
+      label: "About Me ",
+      icon: "/icons/skills.jpg",
+      comp: <SkillsShowcase />,
     },
     {
       id: "Blogs",
       label: "Blogs",
       icon: "/icons/Blogs.png",
-      comp: <Terminals />,
+      comp: <Soon/>,
+    },
+
+    {
+      id: "spotify",
+      label: "Spotify",
+      icon: "/icons/spotify.jpg",
+      comp: <Spotify />,
     },
     {
       id: "Gallery",
@@ -35,16 +40,10 @@ export default function Dock() {
       comp: <MacGallery />,
     },
     {
-      id: "About Me ",
-      label: "About Me ",
-      icon: "/icons/skills.jpg",
-      comp: <SkillsShowcase />,
-    },
-    {
-      id: "spotify",
-      label: "Spotify",
-      icon: "/icons/spotify.jpg",
-      comp: <Spotify />,
+      id: "Google",
+      label: "Google",
+      icon: "/icons/google.jpg",
+      comp: <Google />,
     },
     {
       id: "settings",

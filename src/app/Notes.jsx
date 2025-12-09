@@ -17,7 +17,7 @@ export default function Notes() {
       className="w-full h-full border-none outline-none p-2"
       value={text}
       onChange={(e) => setText(e.target.value)}
-      placeholder="Write notes..."
+      placeholder="Likhu tera nam death note pe kya ? bhag ja yaha se "
     />
   );
 }
