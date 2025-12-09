@@ -28,7 +28,14 @@ export default function App() {
     }
     setStage("power");
   }, []);
+  useEffect(() => {
+    const disableRightClick = (e) => e.preventDefault();
+    document.addEventListener("contextmenu", disableRightClick);
 
+    return () => {
+      document.removeEventListener("contextmenu", disableRightClick);
+    };
+  }, []);
   useEffect(() => {
     if (!stage) return;
     localStorage.setItem("os_state", stage);

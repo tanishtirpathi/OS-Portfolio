@@ -7,6 +7,7 @@ import { Google } from "../app/Google";
 import Spotify from "../app/Spotify";
 import SkillsShowcase from "../app/Skills";
 import MacGallery from "../app/Gallary";
+
 export default function Dock() {
   const openApp = useAppStore((s) => s.openApp);
   const [hoveredApp, setHoveredApp] = useState(null);
@@ -15,8 +16,8 @@ export default function Dock() {
   const apps = [
     { id: "notes", label: "Notes", icon: "/icons/Notes.png", comp: <Notes /> },
     {
-      id: "About Me ",
-      label: "About Me ",
+      id: "About Me",
+      label: "About Me",
       icon: "/icons/skills.jpg",
       comp: <SkillsShowcase />,
     },
@@ -24,9 +25,8 @@ export default function Dock() {
       id: "Blogs",
       label: "Blogs",
       icon: "/icons/Blogs.png",
-      comp: <Soon/>,
+      comp: <Soon />,
     },
-
     {
       id: "spotify",
       label: "Spotify",
@@ -103,13 +103,8 @@ export default function Dock() {
     setBouncingAppId(app.id);
 
     setTimeout(() => {
-      if (app.url) {
-        // 🔥 open in new tab if URL exists
-        window.open(app.url, "_blank");
-      } else {
-        // open internal app
-        openApp(app.id, app.comp);
-      }
+      if (app.url) window.open(app.url, "_blank");
+      else openApp(app.id, app.comp);
       setBouncingAppId(null);
     }, 200);
   };
@@ -117,13 +112,13 @@ export default function Dock() {
   return (
     <div
       className="
-        absolute bottom-3 left-1/2 -translate-x-1/2
-        flex items-center gap-2
-        px-4 py-2 rounded-2xl
-        bg-black/30 backdrop-blur-2xl
-        border border-white/20 shadow-xl
+        absolute bottom-4 left-1/2 -translate-x-1/2
+        flex items-end gap-1.5
+        px-4 py-2 rounded-xl
+        bg-black/35 backdrop-blur-2xl
+        border border-white/20 shadow-2xl
       "
-      style={{ height: "70px" }}
+      style={{ height: "85px", boxShadow: "0 20px 60px rgba(0,0,0)" }}
     >
       {/* Tooltip */}
       {hoveredApp && (
@@ -131,7 +126,7 @@ export default function Dock() {
           className="
             absolute -top-12 left-1/2 -translate-x-1/2
             px-4 py-1 rounded-md
-            bg-black/50 text-white shadow-xl
+            bg-black/70 text-white shadow-xl
             text-sm font-medium backdrop-blur-xl
             animate-fadeSlide pointer-events-none
           "
@@ -145,7 +140,7 @@ export default function Dock() {
           return (
             <div
               key={index}
-              className="w-[1.5px] h-8 bg-white/25 rounded-full mx-2"
+              className="w-[2px] h-16 bg-white/25 rounded-md mx-2"
             />
           );
 
@@ -156,20 +151,39 @@ export default function Dock() {
             onMouseLeave={() => setHoveredApp(null)}
             onClick={() => handleAppClick(app)}
             className={`
-              flex items-center justify-center
-              w-[51px] h-[51px]
-              rounded-lg bg-white/30 backdrop-blur-xl
-              shadow-lg border border-white/20
-              transition-all duration-200 ease-out
-              hover:scale-120 hover:-translate-y-2
+              flex flex-col items-center justify-center
+              w-[58px]
+              transition-all duration-200 ease-out cursor-pointer
+
+              ${hoveredApp?.id === app.id ? "-translate-y-2 scale-110" : ""}
               ${bouncingAppId === app.id ? "animate-bounceOnce" : ""}
             `}
           >
-            <img
-              src={app.icon}
-              alt={app.label}
-              className="w-[44px] h-[44px] object-contain rounded-md"
-            />
+            <div
+              className="
+                w-[50px] h-[50px]
+                rounded-lg bg-white/10 backdrop-blur-xl
+                border border-white/20 shadow-lg
+                flex items-center justify-center
+                transition-all duration-200
+              "
+            >
+              <img
+                src={app.icon}
+                alt={app.label}
+                className="w-[42px] h-[42px] object-contain rounded-md "
+              />
+            </div>
+
+            {/* App Name - Hidden on Hover */}
+            <p
+              className={`
+                text-[11px] text-white/85 font-medium transition-opacity duration-150
+                ${hoveredApp?.id === app.id ? "opacity-0" : "opacity-100"}
+              `}
+            >
+              {app.id}
+            </p>
           </div>
         );
       })}

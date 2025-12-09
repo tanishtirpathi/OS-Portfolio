@@ -6,15 +6,15 @@ export default function Spotify() {
   const playlist = [
     {
       id: 1,
-      title: "I wanna be your slaver",
-      artist: "Justin Bieber",
+      title: "Kya bat hai ",
+      artist: "Hardy sandhu ",
       cover: "/icons/SpotifyOne.png",
       src: "/music/Wanna.mp3", // <-- your mp3 file here
     },
     {
       id: 2,
       title: "Devil in Disguise",
-      artist: "Tanish Tripathi",
+      artist: "glass animal ",
       cover: "/icons/SpotifyTwo.png",
       src: "/music/Devil.mp3",
     },
@@ -100,7 +100,7 @@ export default function Spotify() {
         {playlist.map((song) => (
           <div
             key={song.id}
-            className="bg-black p-4 rounded-xl transition-all duration-300 hover:bg-white/60 hover:text-black shadow-lg cursor-pointer"
+            className="bg-black/60 p-4 rounded-xl transition-all border border-black/20 duration-300 hover:bg-black hover:border-white/40 hover:text-white shadow-lg cursor-pointer"
             onClick={() => playSong(song)}
           >
             <img
