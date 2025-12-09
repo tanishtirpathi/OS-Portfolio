@@ -27,7 +27,7 @@ export default function AboutSection() {
       <div className="max-w-2xl">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">
           Hi, I'm <span className="text-white/90">Tanish</span> —
-          <span className="text-red-400"> A Full Stack Web Developer.</span>
+          <span className="text-red-400"> A Full Stack Software Engineer.</span>
         </h1>
         <p className="text-neutral-200 leading-relaxed mb-6 text-lg font-[Inter] whitespace-pre-line">
           I build interactive and modern web apps using technologies like{" "}
@@ -40,7 +40,15 @@ export default function AboutSection() {
             <img src="icons/ts.jpg" alt="TypeScript" className="skill-icon" />
             TypeScript
           </span>
-          , and{" "}
+          , and
+          <span className="skill-tag border-yellow-300/40 mr-2 ml-2">
+            {" "}
+            <img
+              src="icons/JS.jpg"
+              alt=""
+              className="skill-icon"
+            /> Javascrpt{" "}
+          </span>
           <span className="skill-tag text-white border-white/40">
             <img
               src="icons/ns.jpg"
@@ -51,10 +59,10 @@ export default function AboutSection() {
           </span>
           .{"\n"}I focus heavily on{" "}
           <span className="highlight-tag border-red-300/40">UI design</span>
-          and creating smooth user experiences.
+          and creating smooth efficent webapps 
         </p>
         {/* Skill Tags */}
-        <h2 className="font-semibold mb-3 text-neutral-400">Skills</h2>
+        <h2 className="font-semibold mb-3 text-neutral-400 flex ">Core Skills <img src="icons/github.jpg" alt=""className="rounded-full skill-icon mx-2" /></h2>
         <div className="flex flex-wrap gap-3 mb-10">
           {skills.map((s, i) => (
             <div
