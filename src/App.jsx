@@ -6,7 +6,7 @@ import OnekoCat from "./components/onako/Cat.jsx";
 
 export default function App() {
   const [stage, setStage] = useState(null);
-
+ 
   useEffect(() => {
     const savedState = localStorage.getItem("os_state");
     const savedTime = localStorage.getItem("os_state_time");

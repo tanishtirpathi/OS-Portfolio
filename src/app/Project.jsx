@@ -1,11 +1,19 @@
+import { useState } from "react";
 import ProjectCard from "../components/ProjectCard";
-import { ArrowRight } from "lucide-react";
+
+// ⭐ Import each project detail page
+import { Jarvis } from "../components/Projects/other";
+import { Portfolio } from "../components/Projects/Portfolio";
+import { TripGuard } from "../components/Projects/TripGuard";
+import { Crushsync } from "../components/Projects/Crushsync";
+import { LeetLow } from "../components/Projects/Leetlab";
+import { Mindpin } from "../components/Projects/Mindpin";
 export default function Projects() {
-  const projects = [
+  const allProjects = [
     {
-      title: "Trip GUard",
-      description:
-        "A safty website for tourist that have multiple feature like complaints and life geo fencing ",
+      id: 1,
+      title: "Trip Guard",
+      description: "A safety website  120+ user...",
       technologies: ["React.js", "Js", "Node", "MongoDB", "LLMs"],
       status: "ALL DONE",
       image: "/projects/trip.png",
@@ -13,59 +21,102 @@ export default function Projects() {
       GithubLink: "https://github.com/tanishtirpathi/TripGuard",
     },
     {
-      title: "Crush sync ",
-      description:
-        "A website which take your github and your Crush github and tell more about your relationships posibility ",
-      technologies: ["React js ", "Js", "Github API", "Tailwind"],
+      id: 2,
+      title: "Crush sync",
+      description: "code Crush finder  34+ daily user...",
+      technologies: ["React", "JS", "Github API", "Tailwind"],
       status: "ALL DONE",
       image: "/projects/crush.png",
       link: "https://crushsync.vercel.app",
       GithubLink: "https://github.com/tanishtirpathi/Crushsync",
     },
+
     {
+      id: 3,
+      title: "LeetLow",
+      description: "A small leet code clone...",
+      technologies: ["React.js", "Judge-0", "prisma"],
+      status: "Building",
+      image: "/projects/Leet.png",
+      link: "#",
+      GithubLink: "https://github.com/tanishtirpathi/Leetlow",
+    },
+
+    {
+      id: 4,
+      title: "Mindpin",
+      description: "An desktop app 150+ user ...",
+      technologies: ["Electron", "Core JS", "Tailwind"],
+      status: "ALL DONE",
+      image: "/projects/mind.png",
+      link: "https://mindpin.vercel.app/",
+      GithubLink: "https://github.com/tanishtirpathi/First-desktop-app-",
+    },
+    {
+      id: 5,
       title: "Tanish OS Portfolio",
-      description:
-        "A web-based simulated terminal OS with commands, animations, and custom UI system.",
-      technologies: [
-        "React",
-        "Tailwind",
-        "LocalStorage",
-        "Custom Hooks",
-        "shadcn",
-        "JS",
-      ],
-      status: "operational",
+      description: "Terminal-based Portfolio OS...",
+      technologies: ["React", "Tailwind", "LocalStorage"],
+      status: "Operational",
       image: "/projects/OS.png",
       link: "https://tanishtirpathi.vercel.app",
       GithubLink: "https://github.com/tanishtirpathi/OS-portfolio",
     },
     {
-      title: "LeetLab",
-      description:
-        "A simple and workable leet code clone type website with workable use ",
-      technologies: ["Next.js", "Framer Motion", "Tailwind", "Three.js"],
-      status: "building",
-      image: "/projects/portfolio3.png",
-      link: "",
+      id: 6,
+      title: "Jarvis- ",
+      description: "My personal voice assistant ",
+      technologies: ["LLm ", "python", "Selenium"],
+      status: "ALL DONE",
+      image: "/projects/jarvis.jpg",
+      link: "#",
+      GithubLink:
+        "https://github.com/tanishtirpathi/real-life-jarvis-from-iron-man-",
     },
   ];
 
+  const [visible, setVisible] = useState(4);
+  const [projectId, setProjectId] = useState(null);
+
+  const loadMore = () => setVisible(visible + 2);
+
+  // ⭐ Dynamic component mapping
+  const projectPages = {
+    1: <TripGuard goBack={() => setProjectId(null)} />,
+    2: <Crushsync goBack={() => setProjectId(null)} />,
+    3: <LeetLow goBack={() => setProjectId(null)} />,
+    4: <Mindpin goBack={() => setProjectId(null)} />,
+    5: <Portfolio goBack={() => setProjectId(null)} />,
+    6: <Jarvis goBack={() => setProjectId(null)} />,
+  };
+
+  // ⭐ If a project is selected → show its detail page
+  if (projectId) {
+    return projectPages[projectId] || <div>Project Not Found</div>;
+  }
+
   return (
     <>
-      <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-        {projects.map((p, i) => (
-          <ProjectCard key={i} {...p} />
+      <div className="px-6 py-4 grid grid-cols-1 md:grid-cols-2 gap-6">
+        {allProjects.slice(0, visible).map((p) => (
+          <ProjectCard
+            key={p.id}
+            {...p}
+            onViewDetail={() => setProjectId(p.id)} // ⭐ Set ID on click
+          />
         ))}
       </div>
 
-      <div className="flex items-center justify-center ">
-        <button
-          onclick={() => window.open("")}
-          className="bg-black/50 cursor-pointer flex gap-2 rounded-lg border shadow-2xl mb-10 border-white/40 px-8 py-2"
-        >
-          show all Project <ArrowRight />
-        </button>
-      </div>
+      {visible < allProjects.length && (
+        <div className="flex justify-center">
+          <button
+            onClick={loadMore}
+            className="bg-black/50 border border-white/40 text-white px-6 py-2 rounded-lg mb-10"
+          >
+            Show more projects ↓
+          </button>
+        </div>
+      )}
     </>
   );
 }

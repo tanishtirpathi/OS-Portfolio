@@ -129,7 +129,7 @@ export default function Spotify() {
 
       {/* Now Playing Bar */}
       {currentSong && (
-        <div className="fixed bottom-0 left-0 w-full bg-white/15 backdrop-blur-lg px-4 py-1 flex items-center gap-4 border-t border-white/10">
+        <div className=" cursor-pointer fixed bottom-0 left-0 w-full bg-white/15 backdrop-blur-lg px-4 py-1 flex items-center gap-4 border-t border-white/10">
           <img
             src={currentSong.cover}
             className="w-10 h-10 object-cover rounded-lg"
