@@ -19,6 +19,6 @@ export async function sendToGemini(message) {
     return reply || "Sorry, I couldn't generate a reply.";
   } catch (err) {
     console.error("Gemini Error:", err);
-    return "Error: Failed to fetch response from Gemini.";
+    return "BKL ne api key Use kar li sari ";
   }
 }
