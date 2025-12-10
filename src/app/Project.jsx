@@ -2,7 +2,7 @@ import { useState } from "react";
 import ProjectCard from "../components/ProjectCard";
 
 // ⭐ Import each project detail page
-import { Jarvis } from "../components/Projects/other";
+import { Jarvis } from "../components/Projects/Other";
 import { Portfolio } from "../components/Projects/Portfolio";
 import { TripGuard } from "../components/Projects/TripGuard";
 import { Crushsync } from "../components/Projects/Crushsync";
