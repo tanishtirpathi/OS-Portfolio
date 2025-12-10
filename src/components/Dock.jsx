@@ -6,6 +6,7 @@ import { Terminals } from "../app/Terminal";
 import { Google } from "../app/Google";
 import Spotify from "../app/Spotify";
 import SkillsShowcase from "../app/Skills";
+import ChatBot from "../app/chatbot/Chatbot.jsx";
 import MacGallery from "../app/Gallary";
 
 export default function Dock() {
@@ -15,16 +16,16 @@ export default function Dock() {
 
   const apps = [
     {
-      id: "Projects",
-      label: "Projects",
-      icon: "/icons/Notes.png",
-      comp: <Projects />,
-    },
-    {
       id: "About Me",
       label: "About Me",
       icon: "/icons/skills.jpg",
       comp: <SkillsShowcase />,
+    },
+    {
+      id: "Projects",
+      label: "Projects",
+      icon: "/icons/Notes.png",
+      comp: <Projects />,
     },
     {
       id: "Blogs",
@@ -44,17 +45,18 @@ export default function Dock() {
       icon: "/icons/Gal.jpg",
       comp: <MacGallery />,
     },
+
+    {
+      id: "Jarvis",
+      label: "Jarvis",
+      icon: "/icons/Chat.jpg",
+      comp: <ChatBot />,
+    },
     {
       id: "Google",
       label: "Google",
       icon: "/icons/google.jpg",
       comp: <Google />,
-    },
-    {
-      id: "settings",
-      label: "Settings",
-      icon: "/icons/Setting.jpg",
-      comp: <Soon />,
     },
     {
       id: "terminal",
