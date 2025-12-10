@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @keyframes pulse-slow {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
     box-shadow: 0 0 25px 8px rgba(0, 255, 100, 0.7);
   }
@@ -14,40 +15,70 @@
 }
 /* Hover Tooltip Animation */
 @keyframes fadeSlide {
-  0% { opacity: 0; transform: translateY(5px); }
-  100% { opacity: 1; transform: translateY(0); }
+  0% {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 .animate-fadeSlide {
   animation: fadeSlide 0.25s ease-out forwards;
 }
 
 @keyframes bounceOnce {
-  0% { transform: translateY(0); }
-  40% { transform: translateY(-8px); }
-  70% { transform: translateY(0); }
-  100% { transform: translateY(0); }
+  0% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-8px);
+  }
+  70% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 .animate-bounceOnce {
   animation: bounceOnce 0.22s ease-out;
 }
+
+@keyframes fadeSlide {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+.animate-fadeSlide {
+  animation: fadeSlide 0.4s ease-out;
+}
+
 /* custom range slider */
 .slider {
   accent-color: #1db954; /* Spotify green */
   outline: none;
-  border:none;
+  border: none;
 }
- .skill-tag {
-    @apply text-white/80 py-0.5 px-2 rounded bg-black/5 border inline-flex items-center gap-1;
-  }
-  .skill-icon {
-    @apply w-6 h-6 object-cover;
-  }
-  .highlight-tag {
-    @apply text-white/80 py-0.5 px-1 rounded bg-black/5 border;
-  }
+.skill-tag {
+  @apply text-white/80 py-0.5 px-2 rounded bg-black/5 border inline-flex items-center gap-1;
+}
+.skill-icon {
+  @apply w-6 h-6 object-cover;
+}
+.highlight-tag {
+  @apply text-white/80 py-0.5 px-1 rounded bg-black/5 border;
+}
 
 /* ----------------------------------------------------------------- */
-@import url('https://fonts.googleapis.com/css2?family=Jaini+Purva&family=Syne:wght@400..800&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Jaini+Purva&family=Syne:wght@400..800&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap");
 
 @custom-variant dark (&:is(.dark *));
 

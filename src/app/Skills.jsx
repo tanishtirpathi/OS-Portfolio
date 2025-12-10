@@ -1,7 +1,7 @@
 import React from "react";
 import NowPlaying from "../components/song";
 import { GitHubCalendar } from "react-github-calendar";
-
+import {Send } from "lucide-react"
 export default function AboutSection() {
   const skills = [
     { name: "React", icon: "🎀" },
@@ -81,27 +81,54 @@ export default function AboutSection() {
           </div>
 
           {/* Buttons */}
-          <div className="flex gap-4 mb-10">
-            <button
-              onClick={() =>
-                window.open(
-                  "https://docs.google.com/document/d/e/2PACX-1vSvmlZaSpYs7Z7JWNe2o1VddGUWKsqNUGaQmWqGMDRT-lMaMF5QwWDXeVDqat9EQFwf5Ec_BDmSXWTE/pub"
-                )
-              }
-              className="px-5 cursor-pointer py-2 bg-white text-black rounded-xl font-medium hover:bg-neutral-200 transition"
-            >
-              Resume / CV
-            </button>
+    <div className="flex gap-4 mb-10">
 
-            <button
-              onClick={() =>
-                window.open("https://www.instagram.com/techwithtanish")
-              }
-              className="px-5 py-2 border border-neutral-700 rounded-xl font-medium hover:border-white transition"
-            >
-              Get in touch
-            </button>
-          </div>
+  {/* Resume Button */}
+  <button
+    onClick={() =>
+      window.open(
+        "https://docs.google.com/document/d/e/2PACX-1vSvmlZaSpYs7Z7JWNe2o1VddGUWKsqNUGaQmWqGMDRT-lMaMF5QwWDXeVDqat9EQFwf5Ec_BDmSXWTE/pub"
+      )
+    }
+    className="px-5 py-2 flex items-center gap-2 cursor-pointer 
+               bg-white/10 backdrop-blur-sm text-white rounded-xl 
+               font-medium border border-white/20 
+               hover:bg-white/20 hover:scale-[1.03] transition-all duration-300"
+  >
+    <span className="text-pink-300 text-xl">📄</span>
+    Resume / CV
+  </button>
+
+  {/* Contact Button */}
+  <button
+    onClick={() => window.open("https://www.instagram.com/techwithtanish")}
+    className="px-5 py-2 flex items-center gap-2 
+               border border-white/20 rounded-xl 
+               font-medium text-white 
+               hover:bg-white/10 hover:border-white/40 
+               hover:scale-[1.03] transition-all duration-300"
+  >
+    <span className="text-green-300 text-xl">💬</span>
+    <span>Get in touch</span>
+
+    {/* Cute Send Icon */}
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="w-5 h-5 text-blue-300"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth="2"
+      stroke="currentColor"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M4.5 12l14-7.5-4 7.5 4 7.5-14-7.5z"
+      />
+    </svg>
+  </button>
+</div>
+
 
           {/* Now Playing */}
           <NowPlaying

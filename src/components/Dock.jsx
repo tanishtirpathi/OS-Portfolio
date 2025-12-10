@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useAppStore } from "../store/Appstore.js";
-import Notes from "../app/Notes";
+import Projects from "../app/Project.jsx";
 import Soon from "../app/AddSoon";
 import { Terminals } from "../app/Terminal";
 import { Google } from "../app/Google";
@@ -14,7 +14,12 @@ export default function Dock() {
   const [bouncingAppId, setBouncingAppId] = useState(null);
 
   const apps = [
-    { id: "notes", label: "Notes", icon: "/icons/Notes.png", comp: <Notes /> },
+    {
+      id: "Projects",
+      label: "Projects",
+      icon: "/icons/Notes.png",
+      comp: <Projects />,
+    },
     {
       id: "About Me",
       label: "About Me",

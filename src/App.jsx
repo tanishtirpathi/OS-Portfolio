@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import PowerScreen from "./layouts/PowerScreen";
 import LockScreen from "./layouts/LockScreen";
 import Desktop from "./layouts/DesktopWindow";
+import OnekoCat from "./components/onako/Cat.jsx";
 
 export default function App() {
   const [stage, setStage] = useState(null);
@@ -46,6 +47,7 @@ export default function App() {
 
   return (
     <>
+      <OnekoCat />
       {stage === "power" && <PowerScreen goNext={() => setStage("lock")} />}
       {stage === "lock" && <LockScreen goNext={() => setStage("desktop")} />}
       {stage === "desktop" && <Desktop setStage={setStage} />}

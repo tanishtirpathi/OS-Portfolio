@@ -37,53 +37,67 @@ export function Terminals() {
       ),
 
       cls: "CLEAR_SCREEN",
-      tanish: (
-        <>
-          <div className="text-red-500 font-bold">
-            Tanish Tripathi — Software Engineer
-          </div>
+  tanish: (
+  <div className="animate-fadeSlide bg-white/5 p-4 rounded-xl border border-white/10 shadow-lg">
 
-          <div className="mt-2 text-green-400 font-semibold">About Me:</div>
-          <div className="pl-4 text-white/80">
-            Full-stack dev who loves clean UI, smooth UX and building smart
-            systems.
-          </div>
+    {/* Header with Avatar */}
+    <div className="flex items-center gap-3 mb-3">
+      <img
+        src="/userAV.png"
+        alt="User Avatar"
+        className="w-12 h-12 rounded-full border border-white/20 object-cover"
+      />
 
-          <div className="mt-2 text-blue-400 font-semibold">Skills:</div>
-          <ul className="pl-6 list-disc text-white/80">
-            <li>React / Next.js / Node.js</li>
-            <li>TypeScript, UI/UX, Tailwind</li>
-            <li>API & System Design</li>
-          </ul>
+      <div>
+        <div className="text-red-400 text-lg font-bold">
+          Tanish Tripathi — Software Engineer
+        </div>
+        <div className="text-white/40 text-sm">Full-stack Developer</div>
+      </div>
+    </div>
 
-          <div className="mt-2 text-yellow-500 font-semibold">
-            Fav Movies & Anime:
-          </div>
-          <ul className="pl-6 list-disc text-white/80">
-            <li>Interstellar, Iron Man, The Dark Knight</li>
-            <li>Attack on Titan, classroom of elite , death note </li>
-          </ul>
+    {/* About */}
+    <div className="mt-2 text-green-400 font-semibold">About Me:</div>
+    <div className="pl-4 text-white/80">
+      Full-stack dev who loves clean UI, smooth UX and building smart systems.
+    </div>
 
-          <div className="mt-2 text-white font-semibold">Inspirations:</div>
-          <div className="flex gap-3 pl-4 mt-2">
-            <img
-              src="https://i.pinimg.com/1200x/56/5a/52/565a5243d7d19cb8481b26853ddc54f2.jpg"
-              alt="Tony Stark"
-              className="w-14 h-14 rounded-full border border-white/20 object-cover"
-            />
-            <img
-              src="https://i.pinimg.com/1200x/6f/23/cd/6f23cdd4a62fa1db2c479b5eb1be7b78.jpg"
-              alt="Arjun"
-              className="w-14 h-14 rounded-full border border-white/20 object-cover"
-            />
-            <img
-              src="https://i.pinimg.com/1200x/4f/3b/ba/4f3bba2b973a4b522c1a2ad144006970.jpg"
-              alt="SRK"
-              className="w-14 h-14 rounded-full border border-white/20 object-cover"
-            />
-          </div>
-        </>
-      ),
+    {/* Skills */}
+    <div className="mt-4 text-blue-400 font-semibold">Skills:</div>
+    <ul className="pl-6 list-disc text-white/80">
+      <li>React / Next.js / Node.js</li>
+      <li>TypeScript, UI/UX, Tailwind</li>
+      <li>API & System Design</li>
+    </ul>
+
+    {/* Movies */}
+    <div className="mt-4 text-yellow-500 font-semibold">
+      Fav Movies & Anime:
+    </div>
+    <ul className="pl-6 list-disc text-white/80">
+      <li>Interstellar, Iron Man, The Dark Knight</li>
+      <li>Attack on Titan, Classroom of Elite, Death Note</li>
+    </ul>
+
+    {/* Inspirations */}
+    <div className="mt-4 text-white font-semibold">Inspirations:</div>
+    <div className="flex gap-3 pl-4 mt-2">
+      <img
+        src="https://i.pinimg.com/1200x/56/5a/52/565a5243d7d19cb8481b26853ddc54f2.jpg"
+        className="w-14 h-14 rounded-full border border-white/20 object-cover"
+      />
+      <img
+        src="https://i.pinimg.com/1200x/6f/23/cd/6f23cdd4a62fa1db2c479b5eb1be7b78.jpg"
+        className="w-14 h-14 rounded-full border border-white/20 object-cover"
+      />
+      <img
+        src="https://i.pinimg.com/1200x/4f/3b/ba/4f3bba2b973a4b522c1a2ad144006970.jpg"
+        className="w-14 h-14 rounded-full border border-white/20 object-cover"
+      />
+    </div>
+  </div>
+),
+
     };
 
     if (commands[clean]) return commands[clean];
