@@ -1,80 +1,156 @@
+import { motion } from "framer-motion";
+
+// Define animation variants for entrance/scroll (Fade-up)
+const itemVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
+
+// Define animation variants for the main container's entry and exit
+const pageTransition = {
+  initial: { opacity: 0, y: 50 },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+  exit: { opacity: 0, y: 50, transition: { duration: 0.3, ease: "easeIn" } },
+};
+
 export function Portfolio({ goBack }) {
+  // Function to handle the goBack action and trigger the exit animation
+  const handleGoBack = () => {
+    // This relies on the parent component using <AnimatePresence>
+    goBack();
+  };
+
   return (
-    <div className="max-w-6xl mx-auto px-12 py-10 text-white bg-black/50 rounded-xl shadow-2xl">
+    // Main container uses pageTransition for initial mount and exit animation
+    <motion.div
+      variants={pageTransition}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      className="max-w-6xl mx-auto px-12 py-10 text-white bg-black/50 rounded-xl shadow-2xl"
+    >
       {/* Back Button */}
-      <button
-        onClick={goBack}
+      <motion.button
+        onClick={handleGoBack}
         className="text-sm text-white/70 hover:text-white bg-gray-800/60 px-4 py-1 rounded-md shadow-lg mb-6"
+        variants={itemVariants}
+        initial="hidden"
+        animate="visible"
+        transition={{ duration: 0.6, ease: "easeOut", delay: 0 }}
       >
         ← Back to Projects
-      </button>
+      </motion.button>
 
       {/* Banner */}
-      <div className="w-full h-80 rounded-xl overflow-hidden mb-6">
+      <motion.div
+        className="w-full h-80 rounded-xl overflow-hidden mb-6"
+        variants={itemVariants}
+        initial="hidden"
+        animate="visible"
+        transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }} // Stagger delay
+      >
         <img
           src="/projects/OS.png"
           alt="MacOS Portfolio"
           className="w-full h-full object-cover"
         />
-      </div>
+      </motion.div>
 
       {/* Title */}
-      <div className="flex items-center gap-2 mb-4">
+      <motion.div
+        className="flex items-center gap-2 mb-4"
+        variants={itemVariants}
+        initial="hidden"
+        animate="visible"
+        transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+      >
         <h1 className="text-4xl font-bold">MacOS Style Portfolio</h1>
         <h3 className="text-xl text-white/50 font-normal">
           Interactive & Functional
         </h3>
-      </div>
+      </motion.div>
 
       {/* Short Intro */}
-      <p className="text-white/60 leading-relaxed mb-6">
+      <motion.p
+        className="text-white/60 leading-relaxed mb-6"
+        variants={itemVariants}
+        initial="hidden"
+        animate="visible"
+        transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
+      >
         A fully functional macOS-inspired portfolio built with React,
         TailwindCSS, and ShadCN UI. The portfolio features draggable windows,
         interactive workspaces, a dock, animations, and a working AI assistant
         that responds to user input. It showcases projects, skills, experiences,
         and allows live interactions with the AI assistant.
-      </p>
+      </motion.p>
 
-      {/* Info Boxes */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-        <div className="p-4 bg-black/30 border border-white/10 rounded-xl">
-          <p className="text-xs text-white/50">Frontend</p>
-          <p className="font-medium">React, TailwindCSS, ShadCN UI</p>
-        </div>
-        <div className="p-4 bg-black/30 border border-white/10 rounded-xl">
-          <p className="text-xs text-white/50">Backend</p>
-          <p className="font-medium">Node.js / Optional APIs</p>
-        </div>
-        <div className="p-4 bg-black/30 border border-white/10 rounded-xl">
-          <p className="text-xs text-white/50">Integration</p>
-          <p className="font-medium">AI Assistant, Draggable Components</p>
-        </div>
-        <div className="p-4 bg-black/30 border border-white/10 rounded-xl">
-          <p className="text-xs text-white/50">Status</p>
-          <p className="font-medium">Completed 🟢</p>
-        </div>
-      </div>
+      {/* Info Boxes (Scroll/In-View Animation) */}
+      <motion.div
+        className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ staggerChildren: 0.1 }}
+      >
+        {/* Map through the info boxes for a staggered reveal effect */}
+        {[
+          { title: "Frontend", content: "React, TailwindCSS, ShadCN UI" },
+          { title: "Backend", content: "Node.js / Optional APIs" },
+          {
+            title: "Integration",
+            content: "AI Assistant, Draggable Components",
+          },
+          { title: "Status", content: "Completed 🟢" },
+        ].map((item, index) => (
+          <motion.div
+            key={item.title}
+            className="p-4 bg-black/30 border border-white/10 rounded-xl"
+            variants={itemVariants}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            <p className="text-xs text-white/50">{item.title}</p>
+            <p className="font-medium">{item.content}</p>
+          </motion.div>
+        ))}
+      </motion.div>
 
       {/* Buttons */}
-      <div className="flex flex-wrap gap-4 mb-10">
-        <button
+      <motion.div
+        className="flex flex-wrap gap-4 mb-10"
+        variants={itemVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        <motion.button
           onClick={() => window.open("https://tanishtirpathi.vercel.app")}
           className="px-5 py-2 bg-white/10 border border-white/10 rounded-lg hover:bg-white/20 transition"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
         >
           🔗 Live Portfolio
-        </button>
-        <button
+        </motion.button>
+        <motion.button
           onClick={() =>
             window.open("https://github.com/tanishtirpathi/OS-portfolio")
           }
           className="px-5 py-2 bg-white/10 border border-white/10 rounded-lg hover:bg-white/20 transition"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
         >
           💻 Source Code
-        </button>
-      </div>
+        </motion.button>
+      </motion.div>
 
-      {/* Tags */}
-      <div className="flex flex-wrap gap-2 mt-4 mb-4">
+      {/* Tags (Scroll/In-View Animation) */}
+      <motion.div
+        className="flex flex-wrap gap-2 mt-4 mb-4"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ staggerChildren: 0.05 }}
+      >
         {[
           "React",
           "TailwindCSS",
@@ -83,19 +159,25 @@ export function Portfolio({ goBack }) {
           "macOS UI",
           "Interactive",
         ].map((tag) => (
-          <span
+          <motion.span
             key={tag}
             className="px-3 py-1 text-white/70 bg-gray-800/50 border border-white/60 text-sm rounded-md"
+            variants={itemVariants}
           >
             {tag}
-          </span>
+          </motion.span>
         ))}
-      </div>
+      </motion.div>
 
-      {/* MAIN ARTICLE */}
+      {/* MAIN ARTICLE (Scroll/In-View Animation for all sections) */}
       <section className="space-y-6">
         {/* Overview */}
-        <div>
+        <motion.div
+          variants={itemVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+        >
           <h2 className="text-4xl font-bold mb-2">Overview</h2>
           <p className="text-white/60 leading-relaxed">
             This portfolio replicates macOS aesthetics with functional windows,
@@ -103,10 +185,15 @@ export function Portfolio({ goBack }) {
             components. The highlight is the integrated AI assistant that
             responds to user queries in real-time, enhancing interactivity.
           </p>
-        </div>
+        </motion.div>
 
         {/* Features */}
-        <div>
+        <motion.div
+          variants={itemVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+        >
           <h2 className="text-3xl font-bold mb-2">Key Features</h2>
           <ul className="list-disc list-inside text-white/70 space-y-1">
             <li>macOS-style UI with draggable windows and dock</li>
@@ -118,10 +205,15 @@ export function Portfolio({ goBack }) {
             <li>Showcases multiple projects and skills interactively</li>
             <li>Fully frontend-based with optional API integration for AI</li>
           </ul>
-        </div>
+        </motion.div>
 
         {/* Why I Built */}
-        <div>
+        <motion.div
+          variants={itemVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+        >
           <h2 className="text-2xl font-bold mb-2">Why I Built This</h2>
           <p className="text-white/60">
             I wanted to showcase my projects in a fun and interactive way while
@@ -129,10 +221,15 @@ export function Portfolio({ goBack }) {
             macOS-inspired design with interactive AI elements to create a
             unique personal branding experience.
           </p>
-        </div>
+        </motion.div>
 
         {/* Tech Stack */}
-        <div>
+        <motion.div
+          variants={itemVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+        >
           <h2 className="text-2xl font-bold mb-2">Tech Stack</h2>
           <ul className="list-disc list-inside text-white/70 space-y-1">
             <li>
@@ -154,10 +251,15 @@ export function Portfolio({ goBack }) {
               and draggable windows.
             </li>
           </ul>
-        </div>
+        </motion.div>
 
         {/* Challenges & Solutions */}
-        <div>
+        <motion.div
+          variants={itemVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+        >
           <h2 className="text-2xl font-bold mb-2">Challenges & Solutions</h2>
           <ul className="list-disc list-inside text-white/70 space-y-2">
             <li>
@@ -182,10 +284,15 @@ export function Portfolio({ goBack }) {
               management for layering.
             </li>
           </ul>
-        </div>
+        </motion.div>
 
         {/* After Launch & Impact */}
-        <div>
+        <motion.div
+          variants={itemVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+        >
           <h2 className="text-2xl font-bold mb-2">After Launch & Impact</h2>
           <ul className="list-disc list-inside text-white/60 space-y-2">
             <li>
@@ -203,31 +310,42 @@ export function Portfolio({ goBack }) {
               Encourages longer engagement due to interactivity and animations.
             </li>
           </ul>
-        </div>
+        </motion.div>
 
         {/* Future Plans */}
-        <div>
+        <motion.div
+          variants={itemVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+        >
           <h2 className="text-2xl font-bold mb-2">Future Plans</h2>
           <p className="text-white/60">
             Expand AI assistant capabilities, add more functional mini-apps
             inside the portfolio, and optimize for mobile while maintaining the
             macOS-style experience.
           </p>
-        </div>
+        </motion.div>
 
-        {/* Next Project */}
+        {/* Next Project (View all projects button) */}
         <div className="flex justify-center items-center mt-4">
-          <button
-            onClick={goBack}
+          <motion.button
+            onClick={handleGoBack}
             className="hover:bg-white/15 cursor-pointer px-5 py-1 rounded-md bg-white/10 border border-white/70"
+            variants={itemVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
             View all projects
-          </button>
+          </motion.button>
         </div>
       </section>
 
       <br />
       <br />
-    </div>
+    </motion.div>
   );
 }

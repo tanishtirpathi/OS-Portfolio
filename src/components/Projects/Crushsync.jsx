@@ -1,95 +1,174 @@
+import { motion } from "framer-motion";
+
+// Define animation variants for entrance/scroll (Fade-up)
+const itemVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
+
+// Define animation variants for the main container's entry and exit
+const pageTransition = {
+  initial: { opacity: 0, y: 50 },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+  exit: { opacity: 0, y: 50, transition: { duration: 0.3, ease: "easeIn" } },
+};
+
 export function Crushsync({ goBack }) {
+  // Function to handle the goBack action and trigger the exit animation
+  const handleGoBack = () => {
+    // This relies on the parent component using <AnimatePresence>
+    goBack();
+  };
+
   return (
-    <div className="max-w-4xl mx-auto px-17 py-10 text-white bg-black/50">
+    // Main container uses pageTransition for initial mount and exit animation
+    <motion.div
+      variants={pageTransition}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      className="max-w-4xl mx-auto px-17 py-10 text-white bg-black/50"
+    >
       {/* Back Button */}
-      <button
-        onClick={goBack}
+      <motion.button
+        onClick={handleGoBack}
         className="text-sm text-white/70 hover:text-white bg-black/60 px-4 py-1 rounded-md shadow-2xl mb-6"
+        variants={itemVariants}
+        initial="hidden"
+        animate="visible"
+        transition={{ duration: 0.6, ease: "easeOut", delay: 0 }}
       >
         ← Back to Projects
-      </button>
+      </motion.button>
 
       {/* Banner Image */}
-      <div className="w-full h-70 rounded-xl overflow-hidden mb-6">
+      <motion.div
+        className="w-full h-70 rounded-xl overflow-hidden mb-6"
+        variants={itemVariants}
+        initial="hidden"
+        animate="visible"
+        transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }} // Stagger delay
+      >
         <img
           src="/projects/crush.png"
           alt="CrushSync"
           className="w-full h-full object-cover"
         />
-      </div>
+      </motion.div>
 
       {/* Title */}
-      <div className="gap-2 flex mb-2 items-center ">
+      <motion.div
+        className="gap-2 flex mb-2 items-center"
+        variants={itemVariants}
+        initial="hidden"
+        animate="visible"
+        transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+      >
         <h1 className="text-3xl font-bold mb-2">CrushSync:- </h1>
         <h3 className="text-3xl text-white/50 font-normal mb-2">
           GitHub Relationship Analyzer
         </h3>
-      </div>
+      </motion.div>
 
       {/* Short Intro */}
-      <p className="text-white/60 leading-relaxed mb-6">
+      <motion.p
+        className="text-white/60 leading-relaxed mb-6"
+        variants={itemVariants}
+        initial="hidden"
+        animate="visible"
+        transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
+      >
         CrushSync is a fun, frontend-only website that checks your GitHub
         profile alongside your crush’s GitHub profile and analyzes compatibility
         or “relationship chances.” Inspired by Facebook’s early fun comparison
         websites, this project is purely experimental and built for enjoyment.
-      </p>
+      </motion.p>
 
-      {/* Info Boxes */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-        <div className="p-4 bg-black/30 border border-white/10 rounded-xl">
-          <p className="text-xs text-white/50">Frontend</p>
-          <p className="font-medium">React, TailwindCSS</p>
-        </div>
-        <div className="p-4 bg-black/30 border border-white/10 rounded-xl">
-          <p className="text-xs text-white/50">Backend</p>
-          <p className="font-medium">None</p>
-        </div>
-        <div className="p-4 bg-black/30 border border-white/10 rounded-xl">
-          <p className="text-xs text-white/50">Database</p>
-          <p className="font-medium">None</p>
-        </div>
-        <div className="p-4 bg-black/30 border border-white/10 rounded-xl">
-          <p className="text-xs text-white/50">Status</p>
-          <p className="font-medium">Completed 🟢</p>
-        </div>
-      </div>
+      {/* Info Boxes (Scroll/In-View Animation) */}
+      <motion.div
+        className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ staggerChildren: 0.1 }}
+      >
+        {/* Map through the info boxes for a staggered reveal effect */}
+        {[
+          { title: "Frontend", content: "React, TailwindCSS" },
+          { title: "Backend", content: "None" },
+          { title: "Database", content: "None" },
+          { title: "Status", content: "Completed 🟢" },
+        ].map((item, index) => (
+          <motion.div
+            key={item.title}
+            className="p-4 bg-black/30 border border-white/10 rounded-xl"
+            variants={itemVariants}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            <p className="text-xs text-white/50">{item.title}</p>
+            <p className="font-medium">{item.content}</p>
+          </motion.div>
+        ))}
+      </motion.div>
 
       {/* Buttons */}
-      <div className="flex flex-wrap gap-4 mb-10">
-        <button
+      <motion.div
+        className="flex flex-wrap gap-4 mb-10"
+        variants={itemVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        <motion.button
           onClick={() => window.open("https://crushsync.vercel.app")}
           className="px-5 py-2 bg-white/10 border border-white/10 rounded-lg hover:bg-white/20 transition"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
         >
           🔗 Live Demo
-        </button>
-        <button
+        </motion.button>
+        <motion.button
           onClick={() =>
             window.open("https://github.com/tanishtirpathi/Crushsync")
           }
           className="px-5 py-2 bg-white/10 border border-white/10 rounded-lg hover:bg-white/20 transition"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
         >
           💻 Source Code
-        </button>
-      </div>
+        </motion.button>
+      </motion.div>
 
-      {/* Tags */}
-      <div className="flex flex-wrap gap-2 mt-4 mb-4">
+      {/* Tags (Scroll/In-View Animation) */}
+      <motion.div
+        className="flex flex-wrap gap-2 mt-4 mb-4"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ staggerChildren: 0.05 }}
+      >
         {["Completed 🟢", "Web", "Frontend", "Fun Project", "GitHub"].map(
           (tag) => (
-            <span
+            <motion.span
               key={tag}
               className="px-3 py-1 text-white/70 bg-black/50 border border-white/60 text-sm rounded-md"
+              variants={itemVariants} // Each tag uses the simple fade-up
             >
               {tag}
-            </span>
+            </motion.span>
           )
         )}
-      </div>
+      </motion.div>
 
-      {/* MAIN ARTICLE */}
-      <section className="space-y-6">
+      {/* MAIN ARTICLE (Scroll/In-View Animation for all sections) */}
+      <motion.section className="space-y-6">
         {/* Overview */}
-        <div>
+        <motion.div
+          variants={itemVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+        >
           <h2 className="text-5xl font-bold mb-2">Overview</h2>
           <p className="text-white/60 leading-relaxed">
             CrushSync is a frontend-only website that compares two GitHub
@@ -99,10 +178,15 @@ export function Crushsync({ goBack }) {
             compatibility score. The project is purely experimental and built
             for fun, inspired by early Facebook comparison websites.
           </p>
-        </div>
+        </motion.div>
 
         {/* Features */}
-        <div>
+        <motion.div
+          variants={itemVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+        >
           <h2 className="text-3xl font-bold mb-2">Key Features</h2>
           <ul className="list-disc list-inside text-white/70 space-y-1">
             <li>
@@ -122,10 +206,15 @@ export function Crushsync({ goBack }) {
               React and TailwindCSS.
             </li>
           </ul>
-        </div>
+        </motion.div>
 
         {/* Why I Built This */}
-        <div>
+        <motion.div
+          variants={itemVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+        >
           <h2 className="text-2xl font-bold mb-2">Why I Built This</h2>
           <p className="text-white/60">
             I built CrushSync for fun and learning. Inspired by playful
@@ -134,10 +223,15 @@ export function Crushsync({ goBack }) {
             profiles and provide entertaining “relationship chances.” It was a
             personal challenge and a fun coding experiment.
           </p>
-        </div>
+        </motion.div>
 
         {/* Tech Stack */}
-        <div>
+        <motion.div
+          variants={itemVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+        >
           <h2 className="text-2xl font-bold mb-2">Tech Stack</h2>
           <ul className="list-disc list-inside text-white/70 space-y-1">
             <li>
@@ -152,10 +246,15 @@ export function Crushsync({ goBack }) {
               GitHub analysis.
             </li>
           </ul>
-        </div>
+        </motion.div>
 
         {/* Challenges & Solutions */}
-        <div>
+        <motion.div
+          variants={itemVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+        >
           <h2 className="text-2xl font-bold mb-2">
             Challenges & How I Solved Them
           </h2>
@@ -175,10 +274,15 @@ export function Crushsync({ goBack }) {
               ensure smooth user experience.
             </li>
           </ul>
-        </div>
+        </motion.div>
 
         {/* After Launch & Impact */}
-        <div>
+        <motion.div
+          variants={itemVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+        >
           <h2 className="text-2xl font-bold mb-2">After Launch & Impact</h2>
           <ul className="list-disc list-inside text-white/60 space-y-2">
             <li>
@@ -198,29 +302,40 @@ export function Crushsync({ goBack }) {
               design.
             </li>
           </ul>
-        </div>
+        </motion.div>
 
         {/* Future Plans */}
-        <div>
+        <motion.div
+          variants={itemVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+        >
           <h2 className="text-2xl font-bold mb-2">Future Plans</h2>
           <p className="text-white/60">
             No specific future plans yet; built purely for fun and learning.
           </p>
-        </div>
+        </motion.div>
 
-        {/* Next Project */}
+        {/* Next Project (View all projects button) */}
         <div className="flex justify-center items-center">
-          <button
-            onClick={goBack}
+          <motion.button
+            onClick={handleGoBack}
             className="hover:bg-white/15 cursor-pointer px-5 py-1 rounded-md bg-white/10 border border-white/70"
+            variants={itemVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
             View all projects
-          </button>
+          </motion.button>
         </div>
-      </section>
+      </motion.section>
 
       <br />
       <br />
-    </div>
+    </motion.div>
   );
 }

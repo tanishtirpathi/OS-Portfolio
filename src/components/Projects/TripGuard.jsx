@@ -1,77 +1,161 @@
+import { motion } from "framer-motion";
+
+// Define animation variants for entrance/scroll
+// This provides a consistent, staggered fade-up effect for elements as they enter the viewport
+const itemVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
+
+// Define animation variants for the main container's exit transition
+const pageTransition = {
+  initial: { opacity: 0, y: 50 },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+  exit: { opacity: 0, y: 50, transition: { duration: 0.3, ease: "easeIn" } },
+};
+
+// Custom Hook to manage the goBack and apply exit animation
+// Note: To use the 'exit' animation, this component needs to be wrapped in a <AnimatePresence> component
+// in the parent file where it's being rendered.
+
 export function TripGuard({ goBack }) {
+  // A function to wrap the goBack logic and ensure the exit animation can play
+  const handleGoBack = () => {
+    // You might want to introduce a small delay here if <AnimatePresence> is used
+    // to allow the exit animation to finish before unmounting the component.
+    // However, for a simple 'slide-out' effect, triggering goBack directly works.
+    goBack();
+  };
+
   return (
-    <div className="max-w-4xl mx-auto px-17 py-10 text-white bg-black/50">
+    // Main container uses pageTransition for initial mount and exit animation
+    <motion.div
+      variants={pageTransition}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      className="max-w-4xl mx-auto px-17 py-10 text-white bg-black/50"
+    >
       {/* Back Button */}
-      <button
-        onClick={goBack}
+      <motion.button
+        onClick={handleGoBack}
         className="text-sm text-white/70 hover:text-white bg-black/60 px-4 py-1 rounded-md shadow-2xl mb-6"
+        variants={itemVariants}
+        initial="hidden"
+        animate="visible"
       >
         ← Back to Projects
-      </button>
+      </motion.button>
 
       {/* Banner Image */}
-      <div className="w-full h-70 rounded-xl  overflow-hidden mb-6">
+      <motion.div
+        className="w-full h-70 rounded-xl overflow-hidden mb-6"
+        variants={itemVariants}
+        initial="hidden"
+        animate="visible"
+        transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }} // Stagger delay
+      >
         <img
           src="/projects/trip.png"
           alt="TripGuard"
-          className="w-full h-full object-cover "
+          className="w-full h-full object-cover"
         />
-      </div>
+      </motion.div>
 
       {/* Title */}
-      <div className="gap-2 flex items-center">
+      <motion.div
+        className="gap-2 flex items-center"
+        variants={itemVariants}
+        initial="hidden"
+        animate="visible"
+        transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+      >
         <h1 className="text-3xl font-bold mb-2">TripGuard:- </h1>
         <h3 className="text-3xl text-white/50 font-normal mb-2">
           Tourist Travel safty website{" "}
         </h3>
-      </div>
+      </motion.div>
+
       {/* Short Intro */}
-      <p className="text-white/60 leading-relaxed mb-6">
+      <motion.p
+        className="text-white/60 leading-relaxed mb-6"
+        variants={itemVariants}
+        initial="hidden"
+        animate="visible"
+        transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
+      >
         TripGuard is a tourist-safety web platform designed to help travelers
         explore unfamiliar locations with confidence. It features real-time
         safety alerts, geo-fencing warnings, AI-powered recommendations, a
         complaint system, and emergency-ready tools built for safe navigation.
-      </p>
+      </motion.p>
 
-      {/* Info Boxes */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-        <div className="p-4 bg-black/30 border border-white/10 rounded-xl">
-          <p className="text-xs text-white/50">Frontend</p>
-          <p className="font-medium">React, TailwindCSS</p>
-        </div>
-        <div className="p-4 bg-black/30 border border-white/10 rounded-xl">
-          <p className="text-xs text-white/50">Backend</p>
-          <p className="font-medium">Node.js, Express</p>
-        </div>
-        <div className="p-4 bg-black/30 border border-white/10 rounded-xl">
-          <p className="text-xs text-white/50">Database</p>
-          <p className="font-medium">MongoDB</p>
-        </div>
-        <div className="p-4 bg-black/30 border border-white/10 rounded-xl">
-          <p className="text-xs text-white/50">Status</p>
-          <p className="font-medium">Completed 🟢</p>
-        </div>
-      </div>
+      {/* Info Boxes (Scroll/In-View Animation) */}
+      <motion.div
+        className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6"
+        variants={itemVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        {/* Child elements in the grid can also be motion components for a stagger effect */}
+        {[
+          { title: "Frontend", content: "React, TailwindCSS" },
+          { title: "Backend", content: "Node.js, Express" },
+          { title: "Database", content: "MongoDB" },
+          { title: "Status", content: "Completed 🟢" },
+        ].map((item, index) => (
+          <motion.div
+            key={item.title}
+            className="p-4 bg-black/30 border border-white/10 rounded-xl"
+            variants={itemVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.1 }}
+          >
+            <p className="text-xs text-white/50">{item.title}</p>
+            <p className="font-medium">{item.content}</p>
+          </motion.div>
+        ))}
+      </motion.div>
 
       {/* Buttons */}
-      <div className="flex flex-wrap gap-4 mb-10">
-        <button
+      <motion.div
+        className="flex flex-wrap gap-4 mb-10"
+        variants={itemVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        <motion.button
           onClick={() => window.open("https://trip-guard.vercel.app/")}
           className="px-5 py-2 bg-white/10 border border-white/10 rounded-lg hover:bg-white/20 transition"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
         >
           🔗 Live Demo
-        </button>
-        <button
+        </motion.button>
+        <motion.button
           onClick={() =>
             window.open("https://github.com/tanishtirpathi/TripGuard")
           }
           className="px-5 py-2 bg-white/10 border border-white/10 rounded-lg hover:bg-white/20 transition"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
         >
           💻 Source Code
-        </button>
-      </div>
-      {/* Tags */}
-      <div className="flex flex-wrap gap-2 mt-4 mb-4 ">
+        </motion.button>
+      </motion.div>
+
+      {/* Tags (Scroll/In-View Animation) */}
+      <motion.div
+        className="flex flex-wrap gap-2 mt-4 mb-4"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ staggerChildren: 0.05 }}
+      >
         {[
           "Completed 🟢",
           "Web",
@@ -80,19 +164,25 @@ export function TripGuard({ goBack }) {
           "Geo-fencing",
           "AI",
         ].map((tag) => (
-          <span
+          <motion.span
             key={tag}
-            className="px-3 py-1 text-white/70  bg-black/50 border border-white/60 text-sm rounded-md "
+            className="px-3 py-1 text-white/70 bg-black/50 border border-white/60 text-sm rounded-md"
+            variants={itemVariants} // Each tag uses the simple fade-up
           >
             {tag}
-          </span>
+          </motion.span>
         ))}
-      </div>
+      </motion.div>
 
-      {/* MAIN ARTICLE */}
-      <section className="space-y-6">
+      {/* MAIN ARTICLE (Scroll/In-View Animation for all sections) */}
+      <motion.section className="space-y-6">
         {/* Overview */}
-        <div>
+        <motion.div
+          variants={itemVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+        >
           <h2 className="text-5xl font-bold mb-2">Overview</h2>
           <p className="text-white/60 leading-relaxed">
             TripGuard is a smart travel-safety assistant that provides travelers
@@ -102,12 +192,18 @@ export function TripGuard({ goBack }) {
             insights using AI-powered analysis. It also includes a complaint
             submission module for reporting incidents during travel.
           </p>
-        </div>
+        </motion.div>
 
         {/* Features */}
-        <div>
+        <motion.div
+          variants={itemVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+        >
           <h2 className="text-3xl font-bold mb-2">Key Features</h2>
           <ul className="list-disc list-inside text-white/70 space-y-1">
+            {/* ... other feature list items ... */}
             <li>
               <strong>Real-Time Safety Alerts:</strong> Receive instant
               notifications based on area safety level.
@@ -137,10 +233,15 @@ export function TripGuard({ goBack }) {
               tourists.
             </li>
           </ul>
-        </div>
+        </motion.div>
 
         {/* Why I Built This */}
-        <div>
+        <motion.div
+          variants={itemVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+        >
           <h2 className="text-2xl font-bold mb-2">Why I Built This</h2>
           <p className="text-white/60">
             Traveling to new places is exciting—but also unpredictable. Many
@@ -149,12 +250,18 @@ export function TripGuard({ goBack }) {
             accessible platform that makes travel safer for everyone, especially
             solo travelers, international visitors, and first-time explorers.
           </p>
-        </div>
+        </motion.div>
 
         {/* Tech Stack Details */}
-        <div>
+        <motion.div
+          variants={itemVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+        >
           <h2 className="text-2xl font-bold mb-2">Tech Stack (Detailed)</h2>
           <ul className="list-disc list-inside text-white/70 space-y-1">
+            {/* ... other tech stack list items ... */}
             <li>
               <strong>React + TailwindCSS:</strong> For building a scalable and
               responsive UI.
@@ -180,10 +287,15 @@ export function TripGuard({ goBack }) {
               visual crime-risk representation.
             </li>
           </ul>
-        </div>
+        </motion.div>
 
         {/* Challenges + Solutions */}
-        <div>
+        <motion.div
+          variants={itemVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+        >
           <h2 className="text-2xl font-bold mb-2">
             Challenges & How I Solved Them
           </h2>
@@ -207,24 +319,36 @@ export function TripGuard({ goBack }) {
               aggregation for precise safety ratings.
             </li>
           </ul>
-        </div>
+        </motion.div>
 
         {/* Future Plans */}
-        <div>
+        <motion.div
+          variants={itemVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+        >
           <h2 className="text-2xl font-bold mb-2">Future Plans</h2>
           <ul className="list-disc list-inside text-white/70 space-y-1">
+            {/* ... other future plan list items ... */}
             <li>Mobile App (Android + iOS)</li>
             <li>Connection with Local Police / Admin portals</li>
             <li>Offline Mode for remote areas</li>
             <li>AI-generated travel itineraries based on safety</li>
             <li>Advanced risk prediction using real-world data</li>
           </ul>
-        </div>
+        </motion.div>
 
         {/* After Launch & Impact */}
-        <div>
+        <motion.div
+          variants={itemVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+        >
           <h2 className="text-2xl font-bold mb-2">After Launch & Impact</h2>
           <ul className="list-disc list-inside text-white/60 space-y-2">
+            {/* ... other impact list items ... */}
             <li>
               Successfully reached <strong>25+ active users</strong> within the
               first launch phase.
@@ -250,21 +374,27 @@ export function TripGuard({ goBack }) {
               informed travel experience.
             </li>
           </ul>
-        </div>
+        </motion.div>
 
-        {/* Next Project */}
+        {/* Next Project (View all projects button) */}
         <div className="flex justify-center items-center">
-          <button
-            onClick={goBack}
-            className="hover:bg-white/15 cursor-pointer px-5 py-1 rounded-md bg-white/10 border border-white/70 "
+          <motion.button
+            onClick={handleGoBack}
+            className="hover:bg-white/15 cursor-pointer px-5 py-1 rounded-md bg-white/10 border border-white/70"
+            variants={itemVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
             View all projects{" "}
-          </button>
+          </motion.button>
         </div>
-      </section>
+      </motion.section>
 
       <br />
       <br />
-    </div>
+    </motion.div>
   );
 }

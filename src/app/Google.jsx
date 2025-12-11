@@ -19,14 +19,22 @@ export function Google() {
   return (
     <div className="w-full h-full flex flex-col justify-start items-center bg-black/30 text-black">
       {/* Google Logo */}
-      <h1 className="text-[65px] font-semibold tracking-tight select-none mt-10">
-        <span className="text-blue-500">G</span>
-        <span className="text-red-500">o</span>
-        <span className="text-yellow-500">o</span>
-        <span className="text-blue-500">g</span>
-        <span className="text-green-500">l</span>
-        <span className="text-red-500">e</span>
-      </h1>
+      <div className="gap-7 flex items-center justify-center">
+        <h1 className="text-[65px] font-semibold tracking-tight select-none mt-10">
+          <span className="text-blue-500">S</span>
+          <span className="text-red-500">e</span>
+          <span className="text-yellow-500">x</span>
+          <span className="text-green-500">y</span>
+        </h1>
+        <h1 className="text-[65px] font-semibold tracking-tight select-none mt-10">
+          <span className="text-blue-500">S</span>
+          <span className="text-red-500">e</span>
+          <span className="text-yellow-500">a</span>
+          <span className="text-blue-500">r</span>
+          <span className="text-green-500">c</span>
+          <span className="text-red-500">h</span>
+        </h1>
+      </div>
 
       {/* Search Box */}
       <form

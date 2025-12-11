@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ProjectCard from "../components/ProjectCard";
+import { motion, AnimatePresence } from "framer-motion";
 
 // ⭐ Import each project detail page
 import { Jarvis } from "../components/Projects/Other";
@@ -90,9 +91,45 @@ export default function Projects() {
     6: <Jarvis goBack={() => setProjectId(null)} />,
   };
 
-  // ⭐ If a project is selected → show its detail page
   if (projectId) {
-    return projectPages[projectId] || <div>Project Not Found</div>;
+    return (
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={projectId}
+          initial={{
+            opacity: 0,
+            scale: 0.2,
+            y: 0,
+            x: 0,
+            borderRadius: "50%", // circular bloom
+            filter: "blur(12px)",
+            transformOrigin: "center center",
+          }}
+          animate={{
+            opacity: 1,
+            scale: 1,
+            x: 0,
+            y: 0,
+            borderRadius: "0%", // becomes full rectangle
+            filter: "blur(0px)",
+            transition: {
+              duration: 0.45,
+              ease: [0.16, 1, 0.2, 1], // smooth spring-like
+            },
+          }}
+          exit={{
+            opacity: 0,
+            scale: 0.4,
+            borderRadius: "30%",
+            filter: "blur(8px)",
+            transition: { duration: 0.25, ease: "easeInOut" },
+          }}
+          className="w-full h-full"
+        >
+          {projectPages[projectId] || <div>Project Not Found</div>}
+        </motion.div>
+      </AnimatePresence>
+    );
   }
 
   return (

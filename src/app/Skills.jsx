@@ -1,7 +1,59 @@
 import React from "react";
 import NowPlaying from "../components/song";
 import { GitHubCalendar } from "react-github-calendar";
-import {Send } from "lucide-react"
+import { motion } from "framer-motion";
+
+// --- Animation Variants ---
+
+// 1. Staggered Text Variants (For main intro text)
+const sentence = {
+  hidden: { opacity: 1 },
+  visible: {
+    opacity: 1,
+    transition: {
+      delay: 0.5, // Start after 0.5s
+      staggerChildren: 0.02, // delay between each child (word/letter)
+    },
+  },
+};
+
+const word = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+};
+
+// 2. Element/Section Fade-up Variants (For all other blocks)
+const sectionFadeUp = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } },
+};
+
+// 3. Skill Tags Stagger (A unique 'pop-in' effect)
+const skillContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      delay: 0.8, // Start slightly later
+      staggerChildren: 0.08,
+    },
+  },
+};
+
+const skillItem = {
+  hidden: { opacity: 0, scale: 0.5, rotate: -20 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    rotate: 0,
+    transition: {
+      type: "spring",
+      stiffness: 300,
+      damping: 20,
+    },
+  },
+};
+
 export default function AboutSection() {
   const skills = [
     { name: "React", icon: "🎀" },
@@ -13,11 +65,30 @@ export default function AboutSection() {
     { name: "MongoDB", icon: "🍃" },
   ];
 
+  // Helper function to split text for character/word animation
+  const splitText = (text) => text.split(" ").map((wordText, index) => (
+    <motion.span key={index} variants={word} className="inline-block mr-1">
+      {wordText}
+    </motion.span>
+  ));
+
   return (
-    <section className="min-h-full w-full bg-black/86 text-white px-8 py-10  gap-12">
-      {/* Avatar */}
+    <motion.section
+      className="min-h-full w-full bg-black/86 text-white px-8 py-10 gap-12"
+      initial="hidden"
+      animate="visible"
+      // Use the sectionFadeUp for the entire section's initial entry
+      variants={sectionFadeUp}
+      transition={{ delay: 0.1, duration: 0.5 }}
+    >
+      {/* Avatar & Main Content Container */}
       <div className="flex flex-col md:flex-row items-center gap-10">
-        <div className="flex-shrink-0 mb-29">
+        {/* Avatar with Hover Effect */}
+        <motion.div
+          className="flex-shrink-0 mb-29"
+          whileHover={{ scale: 1.05, boxShadow: "0 0 40px rgba(255, 255, 255, 0.2)" }}
+          transition={{ type: "spring", stiffness: 400, damping: 10 }}
+        >
           <div className="w-40 h-40 rounded-2xl overflow-hidden border border-neutral-800 shadow-xl">
             <img
               src="icons/Tanish.png"
@@ -25,19 +96,32 @@ export default function AboutSection() {
               className="w-full h-full object-cover"
             />
           </div>
-        </div>
+        </motion.div>
 
         {/* Right Side */}
         <div className="max-w-2xl">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Hi, I'm <span className="text-white/90">Tanish</span> —
-            <span className="text-red-400">
+          {/* Staggered Heading Reveal */}
+          <motion.h1
+            className="text-4xl md:text-5xl font-bold mb-4"
+            variants={sentence}
+          >
+            {splitText("Hi, I'm ")}
+            <motion.span className="text-white/90" variants={word}>
+              Tanish
+            </motion.span>
+            <motion.span variants={word}> —</motion.span>
+            <motion.span className="text-red-400" variants={word}>
               {" "}
               A Full Stack Software Engineer.
-            </span>
-          </h1>
+            </motion.span>
+          </motion.h1>
 
-          <p className="text-neutral-200 leading-relaxed mb-6 text-lg font-[Inter] whitespace-pre-line">
+          {/* Staggered Paragraph Reveal */}
+          <motion.p
+            className="text-neutral-200 leading-relaxed mb-6 text-lg font-[Inter] whitespace-pre-line"
+            variants={sectionFadeUp}
+            transition={{ delay: 1.5 }} // Delay after the main header animation
+          >
             I build interactive and modern web apps using technologies like{" "}
             <span className="skill-tag border-blue-400/40">
               <img src="icons/rc.jpg" className="skill-icon" /> React
@@ -57,90 +141,122 @@ export default function AboutSection() {
             .{"\n"}I focus heavily on{" "}
             <span className="highlight-tag border-red-300/40">UI design</span>
             and creating smooth efficient webapps.
-          </p>
+          </motion.p>
 
-          {/* Core Skills */}
-          <h2 className="font-semibold mb-3 text-neutral-400 flex">
+          {/* Core Skills Header */}
+          <motion.h2
+            className="font-semibold mb-3 text-neutral-400 flex"
+            variants={sectionFadeUp}
+            transition={{ delay: 1.8 }}
+          >
             Core Skills
             <img
               src="icons/github.jpg"
               className="rounded-full skill-icon mx-2"
             />
-          </h2>
+          </motion.h2>
 
-          <div className="flex flex-wrap gap-3 mb-10">
+          {/* Unique Skill Tags Pop-in Animation */}
+          <motion.div
+            className="flex flex-wrap gap-3 mb-10"
+            variants={skillContainer}
+          >
             {skills.map((s, i) => (
-              <div
+              <motion.div
                 key={i}
                 className="flex items-center gap-2 px-4 py-2 bg-neutral-900 border border-neutral-800 rounded-xl text-sm hover:bg-neutral-800 transition"
+                variants={skillItem} // Apply the unique pop-in variant
+                whileHover={{ scale: 1.1, zIndex: 10 }}
               >
                 <span>{s.icon}</span>
                 <span>{s.name}</span>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
-          {/* Buttons */}
-    <div className="flex gap-4 mb-10">
+          {/* Buttons with Interactive Effects */}
+          <motion.div
+            className="flex gap-4 mb-10"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ staggerChildren: 0.2 }}
+          >
+            {/* Resume Button */}
+            <motion.button
+              onClick={() =>
+                window.open(
+                  "https://docs.google.com/document/d/e/2PACX-1vSvmlZaSpYs7Z7JWNe2o1VddGUWKsqNUGaQmWqGMDRT-lMaMF5QwWDXeVDqat9EQFwf5Ec_BDmSXWTE/pub"
+                )
+              }
+              className="px-5 py-2 flex items-center gap-2 cursor-pointer 
+                bg-white/10 backdrop-blur-sm text-white rounded-xl 
+                font-medium border border-white/20 
+                hover:bg-white/20 hover:scale-[1.03] transition-all duration-300"
+              variants={sectionFadeUp}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <span className="text-pink-300 text-xl">📄</span>
+              Resume / CV
+            </motion.button>
 
-  {/* Resume Button */}
-  <button
-    onClick={() =>
-      window.open(
-        "https://docs.google.com/document/d/e/2PACX-1vSvmlZaSpYs7Z7JWNe2o1VddGUWKsqNUGaQmWqGMDRT-lMaMF5QwWDXeVDqat9EQFwf5Ec_BDmSXWTE/pub"
-      )
-    }
-    className="px-5 py-2 flex items-center gap-2 cursor-pointer 
-               bg-white/10 backdrop-blur-sm text-white rounded-xl 
-               font-medium border border-white/20 
-               hover:bg-white/20 hover:scale-[1.03] transition-all duration-300"
-  >
-    <span className="text-pink-300 text-xl">📄</span>
-    Resume / CV
-  </button>
+            {/* Contact Button */}
+            <motion.button
+              onClick={() => window.open("https://www.instagram.com/techwithtanish")}
+              className="px-5 py-2 flex items-center gap-2 
+                border border-white/20 rounded-xl 
+                font-medium text-white 
+                hover:bg-white/10 hover:border-white/40 
+                hover:scale-[1.03] transition-all duration-300"
+              variants={sectionFadeUp}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <span className="text-green-300 text-xl">💬</span>
+              <span>Get in touch</span>
+              {/* Cute Send Icon */}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-5 h-5 text-blue-300"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="2"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M4.5 12l14-7.5-4 7.5 4 7.5-14-7.5z"
+                />
+              </svg>
+            </motion.button>
+          </motion.div>
 
-  {/* Contact Button */}
-  <button
-    onClick={() => window.open("https://www.instagram.com/techwithtanish")}
-    className="px-5 py-2 flex items-center gap-2 
-               border border-white/20 rounded-xl 
-               font-medium text-white 
-               hover:bg-white/10 hover:border-white/40 
-               hover:scale-[1.03] transition-all duration-300"
-  >
-    <span className="text-green-300 text-xl">💬</span>
-    <span>Get in touch</span>
-
-    {/* Cute Send Icon */}
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      className="w-5 h-5 text-blue-300"
-      fill="none"
-      viewBox="0 0 24 24"
-      strokeWidth="2"
-      stroke="currentColor"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M4.5 12l14-7.5-4 7.5 4 7.5-14-7.5z"
-      />
-    </svg>
-  </button>
-</div>
-
-
-          {/* Now Playing */}
-          <NowPlaying
-            title="Die with Smile"
-            artist="Lady Gaga"
-            audio="/music/DIE.mp3"
-            cover="/icons/SpotifyThree.jpg"
-          />
+          {/* Now Playing (Scroll Reveal) */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.5 }}
+            variants={sectionFadeUp}
+          >
+            <NowPlaying
+              title="Die with Smile"
+              artist="Lady Gaga"
+              audio="/music/DIE.mp3"
+              cover="/icons/SpotifyThree.jpg"
+            />
+          </motion.div>
         </div>
       </div>
-      {/* --- GitHub Activity Section --- */}
-      <div className="mt-10 px-6 py-2 rounded-2xl bg-black/20 border border-black/10 shadow-lg backdrop-blur-md">
+      {/* --- GitHub Activity Section (Scroll Reveal) --- */}
+      <motion.div
+        className="mt-10 px-6 py-2 rounded-2xl bg-black/20 border border-black/10 shadow-lg backdrop-blur-md"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={sectionFadeUp}
+      >
         <span className="flex justify-between items-center ">
           {" "}
           <h2 className="text-xl font-semibold mb-4 text-neutral-300">
@@ -161,8 +277,15 @@ export default function AboutSection() {
           blockMargin={3.5}
           fontSize={10}
         />
-      </div>
-      <div className="mt-10 px-6 py-6 rounded-xl bg-black/10 border border-white/10 shadow-md backdrop-blur-md">
+      </motion.div>
+      {/* Quote Section (Scroll Reveal) */}
+      <motion.div
+        className="mt-10 px-6 py-6 rounded-xl bg-black/10 border border-white/10 shadow-md backdrop-blur-md"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={sectionFadeUp}
+      >
         <p className="text-white/70 italic text-sm leading-relaxed">
           "You have a right to perform your prescribed duty, but you are not
           entitled to the fruits of actions."
@@ -173,11 +296,18 @@ export default function AboutSection() {
             — Bhagavad Gita
           </p>
         </div>
-      </div>
-      <div className="font-light text-white/40 text-xs mt-10 flex-col flex items-center justify-center">
+      </motion.div>
+      {/* Footer Section (Scroll Reveal) */}
+      <motion.div
+        className="font-light text-white/40 text-xs mt-10 flex-col flex items-center justify-center"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.5 }}
+        variants={sectionFadeUp}
+      >
         <h4>Design & Developed by Tanish TIrpathi © 2025.</h4>
         <p>All rights reserved</p>
-      </div>
-    </section>
+      </motion.div>
+    </motion.section>
   );
 }

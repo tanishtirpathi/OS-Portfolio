@@ -49,7 +49,7 @@ export default function Dock() {
     {
       id: "Jarvis",
       label: "Jarvis",
-      icon: "/icons/Chat.jpg",
+      icon: "/icons/Chat.png",
       comp: <ChatBot />,
     },
     {
@@ -122,7 +122,7 @@ export default function Dock() {
         absolute bottom-4 left-1/2 -translate-x-1/2
         flex items-end gap-1.5
         px-4 py-2 rounded-xl
-        bg-black/35 backdrop-blur-2xl
+        bg-black/55 backdrop-blur-2xl
         border border-white/20 shadow-2xl
       "
       style={{ height: "85px", boxShadow: "0 20px 60px rgba(0,0,0)" }}
@@ -169,7 +169,7 @@ export default function Dock() {
             <div
               className="
                 w-[50px] h-[50px]
-                rounded-lg bg-white/10 backdrop-blur-xl
+                rounded-lg bg-white/20 backdrop-blur-xl
                 border border-white/20 shadow-lg
                 flex items-center justify-center
                 transition-all duration-200
