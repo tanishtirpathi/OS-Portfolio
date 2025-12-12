@@ -1,18 +1,86 @@
 import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const IMAGES = [
   "/Wallpaper/one.jpg",
-  "/Wallpaper/two.jpg",
+  "/Wallpaper/two.png",
   "/Wallpaper/three.jpg",
   "/Wallpaper/four.jpg",
   "/Wallpaper/fie.jpg",
   "/Wallpaper/six.jpg",
   "/Wallpaper/seven.png",
+  "/Wallpaper/eight.jpg",
+  "/Wallpaper/nine.jpg",
+  "/Wallpaper/ten.jpg",
+  "/Wallpaper/eleven.jpg",
+  "/Wallpaper/twelev.jpg",
+  "/Wallpaper/thirteen.jpg",
+  "/Wallpaper/fourteen.jpg",
 ];
+
+// Staggered animation variant for the entrance
+const itemVariants = {
+  hidden: { opacity: 0, scale: 0.8, y: 20 },
+  visible: (i) => ({
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.04, // Slightly faster stagger delay
+      type: "spring",
+      stiffness: 100,
+      damping: 10,
+    },
+  }),
+};
+
+// Component for each grid item to handle the entrance animation
+const StaggeredGridItem = ({ img, i, setSelected }) => {
+  // Logic to define the image height for the asymmetrical grid
+  const getHeight = (index) => {
+    switch (index % 5) {
+      case 0:
+        return "320px";
+      case 1:
+        return "200px";
+      case 2:
+        return "260px";
+      case 3:
+        return "180px";
+      default:
+        return "350px";
+    }
+  };
+
+  return (
+    <motion.div
+      key={i}
+      layoutId={img}
+      custom={i}
+      initial="hidden"
+      animate="visible"
+      variants={itemVariants}
+      whileHover={{ scale: 1.05, filter: "brightness(1.15)" }}
+      transition={{ type: "spring", stiffness: 200, damping: 14 }}
+      onClick={() => setSelected(img)}
+      className="relative group cursor-pointer overflow-hidden rounded-2xl shadow-xl shadow-black/70 border border-white/10 break-inside-avoid"
+    >
+      <img
+        src={img}
+        alt={`Wallpaper ${i + 1}`}
+        className="w-full h-full object-cover rounded-2xl transition-all duration-500 group-hover:scale-[1.02]"
+        style={{
+          height: getHeight(i),
+        }}
+      />
+      {/* Subtle overlay for visual effect */}
+      <div className="absolute inset-0 bg-white/0 group-hover:bg-white/10 backdrop-blur-[1px] transition-all"></div>
+    </motion.div>
+  );
+};
 
 export default function MacGallery() {
   const [selected, setSelected] = useState(null);
-  const [showMenu, setShowMenu] = useState(false);
 
   const setWallpaper = () => {
     localStorage.setItem("desktop_wallpaper", selected);
@@ -22,100 +90,85 @@ export default function MacGallery() {
   };
 
   return (
-    <div className="w-full h-screen bg-neutral-900 text-white p-6 overflow-hidden">
-      <h1 className="text-3xl font-semibold mb-6 text-center">
-        <span className="block text-white/50 font-light text-lg">
-          Set wallpaper from here
+    <div className="w-full min-h-screen py-10 bg-neutral-950 text-white px-6 overflow-hidden">
+      <motion.h1
+        initial={{ y: -50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ type: "spring", stiffness: 150, damping: 15 }}
+        className="text-4xl font-extrabold mb-10 text-center tracking-tight"
+      >
+        <span className="block text-white/70 font-light text-xl mb-1">
+           Wallpaper Gallery
         </span>
-      </h1>
+        <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-purple-500">
+          Captured moments
+        </span>
+      </motion.h1>
 
-      {/* GRID */}
-      <div className="columns-2 sm:columns-3 gap-4 space-y-4">
+      {/* ASYMMETRICAL GRID - using columns utilities for the Pinterest effect */}
+      <div className="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4 max-w-7xl mx-auto">
         {IMAGES.map((img, i) => (
-          <div
-            key={i}
-            className="relative group cursor-pointer overflow-hidden rounded-xl shadow-md shadow-black/40 border border-white/10 break-inside-avoid"
-            onClick={() => setSelected(img)}
-          >
-            <img
-              src={img}
-              className="w-full transition-all duration-300 group-hover:scale-105 group-hover:brightness-110 rounded-xl"
-              style={{
-                height:
-                  i % 5 === 0
-                    ? "320px"
-                    : i % 5 === 1
-                    ? "200px"
-                    : i % 5 === 2
-                    ? "260px"
-                    : i % 5 === 3
-                    ? "180px"
-                    : "350px",
-                objectFit: "cover",
-              }}
-            />
-            <div className="absolute inset-0 bg-white/0 group-hover:bg-white/5 backdrop-blur-sm transition-all"></div>
-          </div>
+          <StaggeredGridItem key={img} img={img} i={i} setSelected={setSelected} />
         ))}
       </div>
 
       {/* LIGHTBOX */}
-      {selected && (
-        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 animate-fadeIn">
-          <div className="relative">
-            <img
-              src={selected}
-              className="max-w-4xl max-h-[80vh] rounded-xl shadow-xl border border-white/20 animate-zoomIn"
-            />
-
-            {/* Three-dot menu */}
-            <div
-              className="absolute top-3 right-3 bg-black/60 hover:bg-black/80 text-white rounded-full px-3 py-1 cursor-pointer"
-              onClick={() => setShowMenu(!showMenu)}
+      <AnimatePresence>
+        {selected && (
+          <motion.div
+            className="fixed inset-0 bg-black/80 backdrop-blur-xl flex items-center justify-center z-50 p-4"
+            initial={{ opacity: 0 }}
+            // Make backdrop fade in faster
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.1 }} // Faster backdrop transition
+            onClick={() => setSelected(null)} // Close on backdrop click
+          >
+            <motion.div
+              layoutId={selected}
+              className="relative"
+              // Prevent closing when clicking on the image content itself
+              onClick={(e) => e.stopPropagation()}
+              initial={{ scale: 0.75, rotate: -3 }}
+              animate={{ scale: 1, rotate: 0 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              // Faster and snappier spring transition for the image
+              transition={{ type: "spring", stiffness: 200, damping: 20 }}
             >
-              ⋮
-            </div>
+              <img
+                src={selected}
+                alt="Selected Wallpaper Preview"
+                className="max-w-full lg:max-w-5xl max-h-[90vh] rounded-3xl shadow-2xl shadow-black/90 border border-white/30"
+              />
 
-            {/* Menu */}
-            {showMenu && (
-              <div className="absolute top-12 right-3 bg-neutral-800 border border-white/20 rounded-lg p-3 w-40 shadow-xl">
-                <button
-                  className="w-full text-left px-2 py-1 hover:bg-neutral-700 rounded"
+              {/* ACTION BUTTONS: Directly on the image */}
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-3">
+                
+                {/* SET WALLPAPER BUTTON */}
+                <motion.button
+                  whileHover={{ scale: 1.05, backgroundColor: "rgba(255, 255, 255, 0.4)" }}
+                  whileTap={{ scale: 0.95 }}
+                  className="px-6 py-3 rounded-full bg-cyan-500/90 hover:bg-cyan-500 text-white font-semibold backdrop-blur-md shadow-lg transition-all border border-white/20"
                   onClick={setWallpaper}
                 >
-                  Set as wallpaper
-                </button>
+                  🚀 Set as Wallpaper
+                </motion.button>
 
-                <button
-                  className="w-full text-left px-2 py-1 mt-1 hover:bg-neutral-700 rounded"
+                {/* CLOSE BUTTON */}
+                <motion.button
+                  whileHover={{ scale: 1.05, backgroundColor: "rgba(255, 255, 255, 0.2)" }}
+                  whileTap={{ scale: 0.95 }}
+                  className="px-6 py-3 rounded-full bg-white/20 hover:bg-white/30 text-white font-semibold backdrop-blur-md shadow-lg transition-all border border-white/20"
                   onClick={() => setSelected(null)}
                 >
-                  Close
-                </button>
+                  ❌ Close
+                </motion.button>
               </div>
-            )}
-          </div>
-        </div>
-      )}
 
-      {/* animations */}
-      <style>{`
-        .animate-fadeIn {
-          animation: fadeIn 0.25s ease-out;
-        }
-        @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-
-        .animate-zoomIn {
-          animation: zoomIn 0.25s ease-out;
-        }
-        @keyframes zoomIn {
-          from { transform: scale(0.9); opacity: 0; }
-          to { transform: scale(1); opacity: 1; }
-        }
-      `}</style>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
