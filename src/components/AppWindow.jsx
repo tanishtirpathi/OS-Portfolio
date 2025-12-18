@@ -9,16 +9,21 @@ export default function AppWindow({ window }) {
   const [isVisible, setIsVisible] = useState(true);
 
   const handleClose = () => {
-    setIsVisible(false); // triggers exit animation
+    setIsVisible(false);
   };
 
   const handleExitComplete = () => {
-    close(window.id); // remove from store AFTER exit animation
+    close(window.id);
   };
 
   return (
     <Rnd
-      default={{ x: 280, y: 90, width: 850, height: 500 }}
+      default={{
+        x: "200",
+        y: "80",
+        width: "70%",
+        height: "76%",
+      }}
       minWidth={400}
       minHeight={250}
       bounds="parent"
@@ -48,15 +53,12 @@ export default function AppWindow({ window }) {
                 <div
                   className="w-3 h-3 bg-red-500 rounded-full cursor-pointer"
                   onClick={handleClose}
-                ></div>
+                />
                 <div
                   className="w-3 h-3 bg-yellow-500 rounded-full cursor-pointer"
                   onClick={handleClose}
-                ></div>
-                <div
-                  className="w-3 h-3 bg-green-500 rounded-full cursor-pointer"
-                  onClick={() => {}}
-                ></div>
+                />
+                <div className="w-3 h-3 bg-green-500 rounded-full cursor-pointer" />
               </div>
 
               {/* Center Title */}
@@ -64,6 +66,7 @@ export default function AppWindow({ window }) {
                 {window.appId}
               </div>
             </div>
+
             {/* App Content */}
             <div className="flex-1 overflow-auto text-white">
               {window.component}
