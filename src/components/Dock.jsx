@@ -8,6 +8,7 @@ import Spotify from "../app/Spotify";
 import SkillsShowcase from "../app/Skills";
 import ChatBot from "../app/chatbot/Chatbot.jsx";
 import MacGallery from "../app/Gallary";
+import Blogs from "../app/Blogs/BlogsSection.jsx";
 
 export default function Dock() {
   const openApp = useAppStore((s) => s.openApp);
@@ -24,14 +25,14 @@ export default function Dock() {
     {
       id: "Projects",
       label: "Projects",
-      icon: "/icons/Notes.png",
+      icon: "/icons/Project.jpg",
       comp: <Projects />,
     },
     {
       id: "Blogs",
       label: "Blogs",
-      icon: "/icons/Blogs.png",
-      comp: <Soon />,
+      icon: "/icons/Notes.png",
+      comp: <Blogs />,
     },
     {
       id: "spotify",

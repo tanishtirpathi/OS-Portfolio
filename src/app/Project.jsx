@@ -9,6 +9,7 @@ import { TripGuard } from "../components/Projects/TripGuard";
 import { Crushsync } from "../components/Projects/Crushsync";
 import { LeetLow } from "../components/Projects/Leetlab";
 import { Mindpin } from "../components/Projects/Mindpin";
+import { TrendUp } from "../components/Projects/TrendUp";
 export default function Projects() {
   const allProjects = [
     {
@@ -23,13 +24,13 @@ export default function Projects() {
     },
     {
       id: 2,
-      title: "Crush sync",
-      description: "code Crush finder  34+ daily user...",
-      technologies: ["React", "JS", "Github API", "Tailwind"],
-      status: "ALL DONE",
-      image: "/projects/crush.png",
-      link: "https://crushsync.vercel.app",
-      GithubLink: "https://github.com/tanishtirpathi/Crushsync",
+      title: "Trend Up ",
+      description: "Chat + video calling freely ",
+      technologies: ["React.js", "shadcn", "express", "MongoDB", "WebRTV"],
+      status: "Building",
+      image: "/projects/trendup.png",
+      link: "#",
+      GithubLink: "https://github.com/tanishtirpathi/trendup",
     },
 
     {
@@ -65,6 +66,16 @@ export default function Projects() {
     },
     {
       id: 6,
+      title: "Crush sync",
+      description: "code Crush finder  34+ daily user...",
+      technologies: ["React", "JS", "Github API", "Tailwind"],
+      status: "ALL DONE",
+      image: "/projects/crush.png",
+      link: "https://crushsync.vercel.app",
+      GithubLink: "https://github.com/tanishtirpathi/Crushsync",
+    },
+    {
+      id: 7,
       title: "Jarvis- ",
       description: "My personal voice assistant ",
       technologies: ["LLm ", "python", "Selenium"],
@@ -84,11 +95,12 @@ export default function Projects() {
   // ⭐ Dynamic component mapping
   const projectPages = {
     1: <TripGuard goBack={() => setProjectId(null)} />,
-    2: <Crushsync goBack={() => setProjectId(null)} />,
+    2: <TrendUp goBack={() => setProjectId(null)} />,
     3: <LeetLow goBack={() => setProjectId(null)} />,
     4: <Mindpin goBack={() => setProjectId(null)} />,
     5: <Portfolio goBack={() => setProjectId(null)} />,
-    6: <Jarvis goBack={() => setProjectId(null)} />,
+    6: <Crushsync goBack={() => setProjectId(null)} />,
+    7: <Jarvis goBack={() => setProjectId(null)} />,
   };
 
   if (projectId) {
