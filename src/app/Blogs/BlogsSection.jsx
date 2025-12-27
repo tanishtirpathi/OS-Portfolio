@@ -74,13 +74,6 @@ export default function Blogs() {
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
             >
-              <header className="mb-8 border-b border-white/5 pb-6">
-                <h2 className="text-3xl font-bold text-white tracking-tight">
-                  {active}
-                </h2>
-                <p className="text-white/40 text-sm mt-1">Explore my collection of {active.toLowerCase()}.</p>
-              </header>
-
               <div className="pb-20">
                 {contentMap[active]}
               </div>
