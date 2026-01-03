@@ -3,17 +3,19 @@ import { motion, AnimatePresence } from "framer-motion";
 import PersonalLife from "./PersonalLife";
 import Movies from "./Movies";
 import Books from "./Books";
-
+import Talk from "./Talk"
 const sections = [
   { id: "Personal", label: "Personal", icon: "👤" },
   { id: "Books", label: "Books", icon: "📚" },
   { id: "Movies", label: "Movies", icon: "🎬" },
+  { id: "LateNight", label: "LateNight", icon: "🦇" },
 ];
 
 const contentMap = {
   Personal: <PersonalLife />,
   Books: <Books />,
   Movies: <Movies />,
+  LateNight: <Talk/>,
 };
 
 export default function Blogs() {
