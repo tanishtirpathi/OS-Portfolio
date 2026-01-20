@@ -74,7 +74,21 @@ function PersonalLife() {
           ))}
         </div>
       </motion.div>
+      {/* Car Section */}
+      <motion.div
+        id="car"
+        variants={item}
+        whileHover={{ scale: 1.03 }}
+        className="relative overflow-hidden rounded-xl border border-white/10"
+      >
+        <img src="./car.jpg" alt="Car" className="w-full h-64 object-cover" />
 
+        <div className="absolute inset-0 bg-black/40 flex items-end p-4">
+          <p className="text-white text-sm font-medium">
+            Machines reflect mindset — precision, speed, control.
+          </p>
+        </div>
+      </motion.div>
       {/* Things I Love */}
       <motion.div variants={item}>
         <h2 className="text-xl font-semibold text-white mb-4">
