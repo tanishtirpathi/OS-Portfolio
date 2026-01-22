@@ -119,6 +119,9 @@ export function TrendUp({ goBack }) {
         viewport={{ once: true, amount: 0.2 }}
       >
         <motion.button
+         onClick={() =>
+            window.open("https://trend-up.vercel.app/")
+          }
           className="px-5 py-2 bg-white/10 border border-white/10 rounded-lg hover:bg-white/20 transition"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -128,7 +131,7 @@ export function TrendUp({ goBack }) {
 
         <motion.button
           onClick={() =>
-            window.open("https://github.com/tanishtirpathi/TrendUp")
+            window.open("https://github.com/tanishtirpathi/trend-Up-")
           }
           className="px-5 py-2 bg-white/10 border border-white/10 rounded-lg hover:bg-white/20 transition"
           whileHover={{ scale: 1.05 }}

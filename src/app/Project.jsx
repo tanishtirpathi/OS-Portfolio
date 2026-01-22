@@ -29,8 +29,8 @@ export default function Projects() {
       technologies: ["React.js", "shadcn", "express", "MongoDB", "WebRTV"],
       status: "Building",
       image: "/projects/trendup.png",
-      link: "#",
-      GithubLink: "https://github.com/tanishtirpathi/trendup",
+      link: "https://trend-up.vercel.app/",
+      GithubLink: "https://github.com/tanishtirpathi/trend-Up-",
     },
 
     {
