@@ -20,13 +20,13 @@ export function Google() {
     <div className="w-full h-full flex flex-col justify-start items-center bg-black/30 text-black">
       {/* Google Logo */}
       <div className="gap-7 flex items-center justify-center">
-        <h1 className="text-[65px] font-semibold tracking-tight select-none mt-10">
+        <h1 className="text-[65px] font-semibold tracking-tight select-none mt-10 instrument-serif-regular-italic">
           <span className="text-blue-500">S</span>
           <span className="text-red-500">e</span>
           <span className="text-yellow-500">x</span>
           <span className="text-green-500">y</span>
         </h1>
-        <h1 className="text-[65px] font-semibold tracking-tight select-none mt-10">
+        <h1 className="text-[65px] font-semibold tracking-tight select-none mt-10 instrument-serif-regular-italic ">
           <span className="text-blue-500">S</span>
           <span className="text-red-500">e</span>
           <span className="text-yellow-500">a</span>

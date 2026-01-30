@@ -19,7 +19,7 @@ export default function ProjectCard({
 
       <div className="p-5">
         <div className="flex justify-between items-center">
-          <h2 onClick={onViewDetail} className="text-lg font-bold cursor-pointer file: text-white">{title}</h2>
+          <h2 onClick={onViewDetail} className="text-lg font-bold cursor-pointer file: text-white instrument-serif-regular-italic">{title}</h2>
 
           <div className="flex gap-4">
             <span className="text-white/60 text-xl cursor-pointer" onClick={() => window.open(GithubLink)}>

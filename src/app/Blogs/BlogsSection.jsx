@@ -26,7 +26,7 @@ export default function Blogs() {
       {/* Sidebar - Changed from fixed to relative for the Window flow */}
       <aside className="w-64 flex-col flex border-r border-white/10 bg-white/5 backdrop-blur-md h-full">
         <div className="p-6">
-          <h2 className="text-xl font-bold tracking-widest uppercase text-white/90">
+          <h2 className="text-xl instrument-serif-regular-italic font-bold tracking-widest uppercase text-white/90">
             Journal
           </h2>
         </div>

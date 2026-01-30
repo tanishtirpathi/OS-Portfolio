@@ -18,6 +18,7 @@ export default function LockScreen({ goNext }) {
   const formattedTime = time.toLocaleTimeString([], {
     hour: "2-digit",
     minute: "2-digit",
+    second: "2-digit"
   });
   const formattedDate = time.toLocaleDateString([], {
     weekday: "long",
@@ -57,11 +58,11 @@ export default function LockScreen({ goNext }) {
       >
         {/* Date + Time */}
         <div className="flex flex-col items-center justify-center mt-16 drop-shadow-lg">
-          <span className="text-[15px] font-bold  leading-none tracking-wide text-white/90">
+          <span className="text-[15px] font-bold  instrument-serif-regular-italic leading-none tracking-wide text-white/90">
             {formattedDate}
           </span>
 
-          <span className="text-[90px] font-syne font-bold leading-none tracking-tight">
+          <span className="text-[90px] font-syne  font-bold leading-none tracking-tight text-white/80">
             {formattedTime}
           </span>
         </div>
@@ -78,10 +79,10 @@ export default function LockScreen({ goNext }) {
               alt="user"
               className="
                 relative z-10
-                w-24 h-24 rounded-full object-cover
-                border border-white/20
+                w-28 h-28 rounded-full object-cover
+                border border-white
                 transition-all duration-500
-                group-hover:scale-110
+                group-hover:scale-120
               "
             />
           </div>
@@ -103,10 +104,10 @@ export default function LockScreen({ goNext }) {
             "
           >
             <span className="font-syne">
-              <p className="font-medium text-[12px] shadow-lg">
+              <p className="font-medium text-[12px] shadow-lg instrument-serif-regular-italic">
                 Tanish Tirpathi
               </p>
-              <p className="font-light font-syne text-white/50 text-[12px] shadow-xl">
+              <p className="font-light font-syne text-white/50 text-[13px] shadow-xl">
                 click here to unlock..
               </p>
             </span>

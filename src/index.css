@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
 @keyframes pulse-slow {
   0%,
   100% {
@@ -9,6 +10,17 @@
     transform: scale(1.07);
     box-shadow: 0 0 45px 15px rgba(0, 255, 100, 1);
   }
+}
+.instrument-serif-regular {
+  font-family: "Instrument Serif", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.instrument-serif-regular-italic {
+  font-family: "Instrument Serif", serif;
+  font-weight: 400;
+  font-style: italic;
 }
 .animate-pulse-slow {
   animation: pulse-slow 2.6s ease-in-out infinite;

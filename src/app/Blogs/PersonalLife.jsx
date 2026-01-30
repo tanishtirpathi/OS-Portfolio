@@ -48,7 +48,7 @@ function PersonalLife() {
     >
       {/* Header */}
       <motion.div variants={item} className="text-center">
-        <h1 className="text-3xl font-bold text-white mb-2">My Personal Life</h1>
+        <h1 className="text-3xl font-bold text-white mb-2 instrument-serif-regular-italic">My Personal Life</h1>
         <p className="text-white/60 text-sm max-w-xl mx-auto">
           Thoughts, habits, and the things that shape who I’m becoming.
         </p>
@@ -65,7 +65,7 @@ function PersonalLife() {
               whileHover={{ y: -4 }}
               className="bg-white/5 border cursor-pointer border-white/10 rounded-lg p-5 backdrop-blur-sm hover:border-green-100/40 transition"
             >
-              <h3 className="text-white font-semibold mb-1">{blog.title}</h3>
+              <h3 className="text-white font-semibold mb-1 instrument-serif-regular-italic">{blog.title}</h3>
               <p className="text-green-500/90 text-xs mb-3">{blog.date}</p>
               <p className="text-white/60 text-sm leading-relaxed">
                 {blog.content}
@@ -112,7 +112,7 @@ function PersonalLife() {
         variants={item}
         className="bg-gradient-to-r from-black/40 to-black/20 border border-white/10 rounded-xl p-6"
       >
-        <h2 className="text-xl font-semibold text-white mb-2">
+        <h2 className="text-xl instrument-serif-regular-italic font-semibold text-white mb-2">
           Current Mindset 🧠
         </h2>
         <p className="text-white/60 text-sm leading-relaxed">

@@ -29,7 +29,7 @@ function Talk() {
     >
       {/* Header */}
       <motion.div variants={item} className="text-center">
-        <h1 className="text-3xl font-bold text-white/60 mb-2">My Late Night talk </h1>
+        <h1 className="text-3xl font-bold text-white/60 mb-2 instrument-serif-regular-italic">My Late Night talk </h1>
       </motion.div>
 
       {/* Blogs Section */}

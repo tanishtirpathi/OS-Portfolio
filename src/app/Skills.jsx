@@ -107,10 +107,10 @@ export default function AboutSection() {
           >
             {splitText("Hi, I'm ")}
             <motion.span className="text-white/90" variants={word}>
-              Tanish
+             <span className="instrument-serif-regular-italic">Tanish</span>
             </motion.span>
             <motion.span variants={word}> —</motion.span>
-            <motion.span className="text-red-400" variants={word}>
+            <motion.span className="text-red-500 font-instrument italic" variants={word}>
               {" "}
               A Full Stack Software Engineer.
             </motion.span>
@@ -118,11 +118,11 @@ export default function AboutSection() {
 
           {/* Staggered Paragraph Reveal */}
           <motion.p
-            className="text-neutral-200 leading-relaxed mb-6 text-lg font-[Inter] whitespace-pre-line"
+            className="text-neutral-200 leading-relaxed instrument-serif-regular-italic mb-6 text-lg font-[Inter] whitespace-pre-line"
             variants={sectionFadeUp}
             transition={{ delay: 1.5 }} // Delay after the main header animation
           >
-            I build interactive and modern web apps using technologies like{" "}
+            I build interactive and <span className="instrument-serif-regular-italic">modern</span>  web apps using technologies like{" "}
             <span className="skill-tag border-blue-400/40">
               <img src="icons/rc.jpg" className="skill-icon" /> React
             </span>
@@ -203,7 +203,7 @@ export default function AboutSection() {
 
             {/* Contact Button */}
             <motion.button
-              onClick={() => window.open("https://www.instagram.com/techwithtanish")}
+              onClick={() => window.open("https://www.instagram.com/tanish.speaks/")}
               className="px-5 py-2 flex items-center gap-2 
                 border border-white/20 rounded-xl 
                 font-medium text-white 

@@ -83,7 +83,7 @@ export default function Dock() {
       id: "Instagram",
       label: "Instagram",
       icon: "/icons/Instagram.jpg",
-      url: "https://www.instagram.com/techwithtanish/",
+      url: "https://www.instagram.com/tanish.speaks/",
     },
     {
       id: "x",
@@ -133,7 +133,7 @@ export default function Dock() {
         <div
           className="
             absolute -top-12 left-1/2 -translate-x-1/2
-            px-4 py-1 rounded-md
+            px-4 py-1 rounded-md instrument-serif-regular-italic
             bg-black/70 text-white shadow-xl
             text-sm font-medium backdrop-blur-xl
             animate-fadeSlide pointer-events-none
@@ -158,7 +158,7 @@ export default function Dock() {
             onMouseEnter={() => setHoveredApp(app)}
             onMouseLeave={() => setHoveredApp(null)}
             onClick={() => handleAppClick(app)}
-            className={`
+            className={`instrument-serif-regular-italic
               flex flex-col items-center justify-center
               w-[58px]
               transition-all duration-200 ease-out cursor-pointer
@@ -185,7 +185,7 @@ export default function Dock() {
 
             {/* App Name - Hidden on Hover */}
             <p
-              className={`
+              className={`instrument-serif-regular-italic
                 text-[11px] text-white/85 font-medium transition-opacity duration-150
                 ${hoveredApp?.id === app.id ? "opacity-0" : "opacity-100"}
               `}

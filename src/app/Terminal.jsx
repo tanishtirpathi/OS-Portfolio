@@ -70,7 +70,7 @@ export function Terminals() {
             <div className="flex flex-col gap-2">
               {/* Name Row */}
               <div className="flex items-end gap-1">
-                <h1 className="text-red-600 text-4xl font-extrabold font-mono tracking-tight">
+                <h1 className="text-red-600 text-4xl font-extrabold font-mono tracking-tight instrument-serif-regular-italic">
                   Tanish Tripathi
                 </h1>
               </div>
@@ -109,7 +109,7 @@ export function Terminals() {
                 </div>
 
                 <div className="flex gap-2">
-                  <span className="text-red-500 font-semibold min-w-[90px]">
+                  <span className="text-red-500 font-semibold min-w-[90px] ">
                     Interests:
                   </span>
                   <span className="text-white/80">
@@ -122,7 +122,7 @@ export function Terminals() {
           <div className="mt-10">
             <div>
               {" "}
-              <h2 className="text-red-500 font-bold text-2xl mb-5 ">
+              <h2 className="text-red-500 font-bold text-2xl mb-5 instrument-serif-regular-italic">
                 Currently Doing things
               </h2>
             </div>
@@ -165,7 +165,7 @@ export function Terminals() {
           <div className="mt-10">
             <div>
               {" "}
-              <h2 className="text-red-500 font-bold text-2xl mb-5 ">
+              <h2 className="text-red-500 font-bold text-2xl mb-5 instrument-serif-regular-italic ">
                 Inspiration for Me
               </h2>
             </div>
