@@ -91,6 +91,12 @@ export default function Dock() {
       icon: "/icons/X.jpg",
       url: "https://x.com/tanishtirpathi",
     },
+        {
+      id: "chess",
+      label: "Chess",
+      icon: "/icons/chess.jpg",
+      url: "https://www.chess.com/member/tanishtirpathi",
+    },
     {
       id: "linkedin",
       label: "LinkedIn",
