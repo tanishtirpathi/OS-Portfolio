@@ -162,7 +162,7 @@ export default function Projects() {
             onClick={loadMore}
             className="bg-black/50 border border-white/40 text-white px-6 py-2 rounded-lg mb-10"
           >
-            Show more projects ↓
+            Show other projects ↓
           </button>
         </div>
       )}
