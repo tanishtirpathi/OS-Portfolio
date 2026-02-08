@@ -1,24 +1,22 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
-
-const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-
-if (!apiKey) {
-  console.error("VITE_GEMINI_API_KEY is missing in .env");
-}
-
-const genAI = new GoogleGenerativeAI(apiKey);
-
 export async function sendToGemini(message) {
   try {
-    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+    const res = await fetch("https://portfolio-backend-1-f82j.onrender.com/chatbot", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ message }),
+    });
 
-    const result = await model.generateContent(message);
+    const data = await res.json();
 
-    const reply = result?.response?.text()?.trim();
+    if (!res.ok) {
+      throw new Error(data.error || "Backend error");
+    }
 
-    return reply || "Sorry, I couldn't generate a reply.";
+    return data.reply;
   } catch (err) {
-    console.error("Gemini Error:", err);
-    return "BKL ne api key Use kar li sari ";
+    console.error("Frontend API error:", err);
+    return "bkl ne api khatam kardi {MF used the api limit}";
   }
 }

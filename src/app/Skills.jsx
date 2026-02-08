@@ -2,6 +2,7 @@ import React from "react";
 import NowPlaying from "../components/song";
 import { GitHubCalendar } from "react-github-calendar";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 // --- Animation Variants ---
 
@@ -64,13 +65,22 @@ export default function AboutSection() {
     { name: "PostgreSQL", icon: "🐘" },
     { name: "MongoDB", icon: "🍃" },
   ];
+  const [waka, setWaka] = useState(null);
+
+  useEffect(() => {
+   fetch("https://portfolio-backend-1-f82j.onrender.com/")
+      .then((res) => res.json())
+      .then((data) => setWaka(data))
+      .catch(() => setWaka(null));
+  }, []);
 
   // Helper function to split text for character/word animation
-  const splitText = (text) => text.split(" ").map((wordText, index) => (
-    <motion.span key={index} variants={word} className="inline-block mr-1">
-      {wordText}
-    </motion.span>
-  ));
+  const splitText = (text) =>
+    text.split(" ").map((wordText, index) => (
+      <motion.span key={index} variants={word} className="inline-block mr-1">
+        {wordText}
+      </motion.span>
+    ));
 
   return (
     <motion.section
@@ -86,7 +96,10 @@ export default function AboutSection() {
         {/* Avatar with Hover Effect */}
         <motion.div
           className="flex-shrink-0 mb-29"
-          whileHover={{ scale: 1.05, boxShadow: "0 0 40px rgba(255, 255, 255, 0.2)" }}
+          whileHover={{
+            scale: 1.05,
+            boxShadow: "0 0 40px rgba(255, 255, 255, 0.2)",
+          }}
           transition={{ type: "spring", stiffness: 400, damping: 10 }}
         >
           <div className="w-40 h-40 rounded-2xl overflow-hidden border border-neutral-800 shadow-xl">
@@ -107,10 +120,13 @@ export default function AboutSection() {
           >
             {splitText("Hi, I'm ")}
             <motion.span className="text-white/90" variants={word}>
-             <span className="instrument-serif-regular-italic">Tanish</span>
+              <span className="instrument-serif-regular-italic">Tanish</span>
             </motion.span>
             <motion.span variants={word}> —</motion.span>
-            <motion.span className="text-red-500 font-instrument italic" variants={word}>
+            <motion.span
+              className="text-red-500 font-instrument italic"
+              variants={word}
+            >
               {" "}
               A Full Stack Software Engineer.
             </motion.span>
@@ -122,7 +138,9 @@ export default function AboutSection() {
             variants={sectionFadeUp}
             transition={{ delay: 1.5 }} // Delay after the main header animation
           >
-            I build interactive and <span className="instrument-serif-regular-italic">modern</span>  web apps using technologies like{" "}
+            I build interactive and{" "}
+            <span className="instrument-serif-regular-italic">modern</span> web
+            apps using technologies like{" "}
             <span className="skill-tag border-blue-400/40">
               <img src="icons/rc.jpg" className="skill-icon" /> React
             </span>
@@ -186,7 +204,7 @@ export default function AboutSection() {
             <motion.button
               onClick={() =>
                 window.open(
-                  "https://docs.google.com/document/d/e/2PACX-1vSvmlZaSpYs7Z7JWNe2o1VddGUWKsqNUGaQmWqGMDRT-lMaMF5QwWDXeVDqat9EQFwf5Ec_BDmSXWTE/pub"
+                  "https://docs.google.com/document/d/e/2PACX-1vSvmlZaSpYs7Z7JWNe2o1VddGUWKsqNUGaQmWqGMDRT-lMaMF5QwWDXeVDqat9EQFwf5Ec_BDmSXWTE/pub",
                 )
               }
               className="px-5 py-2 flex items-center gap-2 cursor-pointer 
@@ -203,7 +221,9 @@ export default function AboutSection() {
 
             {/* Contact Button */}
             <motion.button
-              onClick={() => window.open("https://www.instagram.com/tanish.speaks/")}
+              onClick={() =>
+                window.open("https://www.instagram.com/tanish.speaks/")
+              }
               className="px-5 py-2 flex items-center gap-2 
                 border border-white/20 rounded-xl 
                 font-medium text-white 
@@ -263,10 +283,25 @@ export default function AboutSection() {
             <h3 className="text-xl font-light text-white/30 ">Featured</h3>
             GitHub Activity
           </h2>
-          <div className=" flex items-center justify-center gap-1 text-white/40">
-            <p className="font-bold"> Offline</p>{" "}
-            <img src="icons/vs.png" className="w-8 h-8" alt="" />{" "}
-            <p className="font-light "> Yesterday worked 8hrs</p>
+          <div className="flex items-center gap-2 text-white/40 text-sm">
+            <img src="icons/vs.png" className="w-7 h-7" alt="VS Code" />
+
+            {waka?.languages?.length >0 && (
+  <div className=" flex flex-wrap gap-3">
+    {waka.languages.map((lang, i) => (
+      <div
+        key={i}
+        className="text-sm text-white/80  "
+      ><span className="font-bold pr-1">coded:</span>
+        <span className="font-light instrument-serif-regular-italic text-yellow-400">{lang.name}</span>
+        <span className="text-white/40 ml-2">
+          {lang.total_seconds}Min
+        </span>
+      </div>
+    ))}
+  </div>
+)}
+
           </div>
         </span>
 
@@ -279,6 +314,8 @@ export default function AboutSection() {
         />
       </motion.div>
       {/* Quote Section (Scroll Reveal) */}
+      {/* {bro this is the other thing which is code timer shwo } */}
+
       <motion.div
         className="mt-10 px-6 py-6 rounded-xl bg-black/10 border border-white/10 shadow-md backdrop-blur-md"
         initial="hidden"
