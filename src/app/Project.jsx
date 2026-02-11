@@ -25,9 +25,9 @@ export default function Projects() {
     {
       id: 2,
       title: "Trend Up ",
-      description: "Chat + video calling freely ",
+      description: "Chat + freely 15+ user ",
       technologies: ["React.js", "shadcn", "express", "MongoDB", "WebRTV"],
-      status: "Building",
+      status: "ALL DONE",
       image: "/projects/trendup.png",
       link: "https://trend-up.vercel.app/",
       GithubLink: "https://github.com/tanishtirpathi/trend-Up-",
