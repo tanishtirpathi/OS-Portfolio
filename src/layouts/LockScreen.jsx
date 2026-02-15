@@ -68,7 +68,7 @@ export default function LockScreen({ goNext }) {
         </div>
 
         {/* Avatar + Button */}
-        <div className="flex flex-col items-center justify-center  gap-6">
+        <div className="flex flex-col items-center justify-center mb-10  gap-6">
           {/* ⭐ HOVER EFFECT ADDED HERE ⭐ */}
           <div className="relative group">
             {/* Glass Glow Circle */}

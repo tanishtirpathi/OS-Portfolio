@@ -14,11 +14,11 @@ export default function PowerScreen({ goNext }) {
   const screenVariants = {
     initial: { opacity: 1, scale: 1, filter: "blur(0px)" },
     exit: {
-      opacity: 0,
-      scale: 1.15,          // Professional zoom
-      filter: "blur(25px)", // Professional blur strength
+      opacity: 0.6,
+      scale: 1.05,          // Professional zoom
+      filter: "blur(55px)", // Professional blur strength
       transition: { 
-        duration: 0.7, 
+        duration: 0.4, 
         ease: "easeOut",
       },
     },
