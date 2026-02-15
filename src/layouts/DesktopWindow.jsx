@@ -31,7 +31,7 @@ export default function Desktop({ setStage }) {
         <AppWindow window={w} key={w.id} />
       ))}
 
-      <Dock />
+      <Dock/>
     </div>
   );
 }

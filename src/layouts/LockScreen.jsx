@@ -57,18 +57,18 @@ export default function LockScreen({ goNext }) {
           }`}
       >
         {/* Date + Time */}
-        <div className="flex flex-col items-center justify-center mt-16 drop-shadow-lg">
-          <span className="text-[15px] font-bold  instrument-serif-regular-italic leading-none tracking-wide text-white/90">
+        <div className="flex flex-col items-center justify-center mt-36 drop-shadow-lg">
+          <span className="text-[15px] font-bold  instrument-serif-regular-italic leading-none tracking-wide text-white">
             {formattedDate}
           </span>
 
-          <span className="text-[90px] font-syne  font-bold leading-none tracking-tight text-white/80">
+          <span className="text-[60px] font-syne  font-bold leading-none tracking-tight text-white">
             {formattedTime}
           </span>
         </div>
 
         {/* Avatar + Button */}
-        <div className="flex flex-col items-center justify-center mb-26 gap-6">
+        <div className="flex flex-col items-center justify-center  gap-6">
           {/* ⭐ HOVER EFFECT ADDED HERE ⭐ */}
           <div className="relative group">
             {/* Glass Glow Circle */}
@@ -79,7 +79,7 @@ export default function LockScreen({ goNext }) {
               alt="user"
               className="
                 relative z-10
-                w-28 h-28 rounded-full object-cover
+                w-22 h-22 rounded-full object-cover
                 border border-white
                 transition-all duration-500
                 group-hover:scale-120
@@ -97,17 +97,15 @@ export default function LockScreen({ goNext }) {
               flex items-center gap-4
               text-lg font-semibold tracking-[0.2em] uppercase
               text-white
-              shadow-[0_8px_32px_rgba(0,0,0,0.3)]
               transition-all duration-300 ease-out
-              hover:bg-white/5 hover:border-white/30
       
             "
           >
-            <span className="font-syne">
-              <p className="font-medium text-[12px] shadow-lg instrument-serif-regular-italic">
+            <span>
+              <p className="font-bold font-syne text-xs shadow-lg text-white ">
                 Tanish Tirpathi
               </p>
-              <p className="font-light font-syne text-white/50 text-[13px] shadow-xl">
+              <p className="font-light font-mono text-white/90 text-xs shadow-xl">
                 click here to unlock..
               </p>
             </span>

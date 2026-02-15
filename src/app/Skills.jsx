@@ -56,15 +56,29 @@ const skillItem = {
 };
 
 export default function AboutSection() {
-  const skills = [
-    { name: "React", icon: "🎀" },
-    { name: "JavaScript", icon: "🟨" },
-    { name: "TypeScript", icon: "🟦" },
-    { name: "Tailwind", icon: "⬛" },
-    { name: "Node.js", icon: "🟢" },
-    { name: "PostgreSQL", icon: "🐘" },
-    { name: "MongoDB", icon: "🍃" },
-  ];
+const skills = [
+  { name: "React", icon: "⚛️" },
+  { name: "Next.js", icon: "▲" },
+  { name: "JavaScript", icon: "🟨" },
+  { name: "TypeScript", icon: "🟦" },
+  { name: "Tailwind CSS", icon: "🌬️" },
+
+  { name: "Node.js", icon: "🟢" },
+  { name: "Bun", icon: "🥟" },
+
+  { name: "Express.js", icon: "🚂" },
+  { name: "REST API Design", icon: "🔗" },
+  { name: "WebSockets", icon: "🔌" },
+
+  { name: "PostgreSQL", icon: "🐘" },
+  { name: "MongoDB", icon: "🍃" },
+  { name: "Redis", icon: "🟥" },
+  { name: "OAuth 2.0", icon: "🛡️" },
+  { name: "Docker", icon: "🐳" },
+  { name: "System Design Basics", icon: "🏗️" },
+  { name: "Caching Strategies", icon: "⚡" },
+];
+
   const [waka, setWaka] = useState(null);
 
   useEffect(() => {
@@ -292,10 +306,10 @@ export default function AboutSection() {
       <div
         key={i}
         className="text-sm text-white/80  "
-      ><span className="font-bold pr-1">coded:</span>
+      ><span className="font-bold pr-1">code update:</span>
         <span className="font-light instrument-serif-regular-italic text-yellow-400">{lang.name}</span>
-        <span className="text-white/40 ml-2">
-          {lang.total_seconds}Min
+        <span className="text-white/40 ml-2 font-syne text-xs">
+          {lang.total_seconds}
         </span>
       </div>
     ))}
